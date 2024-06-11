@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Island Simulation</title>
+    <style>
+        .island {
+            display: grid;
+            grid-template-columns: repeat(100, 20px);
+            grid-template-rows: repeat(20, 20px);
+            gap: 1px;
+        }
+        .cell {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Island Simulation</h1>
+<form action="/api/animals/predator" method="post">
+    <label for="predatorType">Add Predator:</label>
+    <select id="predatorType" name="predatorType">
+        <option value="BEAR">Bear</option>
+        <option value="BOA">Boa</option>
+        <option value="EAGLE">Eagle</option>
+        <option value="FOX">Fox</option>
+        <option value="WOLF">Wolf</option>
+    </select>
+    <button type="submit">Add Predator</button>
+</form>
+
+<form action="/api/animals/herbivore" method="post">
+    <label for="herbivoreType">Add Herbivore:</label>
+    <select id="herbivoreType" name="herbivoreType">
+        <option value="BOAR">Boar</option>
+        <option value="BUFFALO">Buffalo</option>
+        <option value="CATERPILLAR">Caterpillar</option>
+        <option value="DEER">Deer</option>
+        <option value="DUCK">Duck</option>
+        <option value="GOAT">Goat</option>
+        <option value="HORSE">Horse</option>
+        <option value="MOUSE">Mouse</option>
+        <option value="RABBIT">Rabbit</option>
+        <option value="SHEEP">Sheep</option>
+    </select>
+    <button type="submit">Add Herbivore</button>
+</form>
+
+<div class="island" th:if="${island != null}">
+    <div th:each="row : ${island}">
+        <div th:each="cell : ${row}" class="cell" th:text="${cell}"></div>
+    </div>
+</div>
+</body>
+</html>
