@@ -14,7 +14,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultReproducing
 
 public class Eagle extends Animal {
 
-    private Long id;
+
 
     public Eagle() {
         super(6, 20, 3, 1,

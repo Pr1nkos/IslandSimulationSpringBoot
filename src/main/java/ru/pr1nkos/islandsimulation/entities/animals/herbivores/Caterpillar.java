@@ -13,7 +13,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBeh
 
 public class Caterpillar extends Animal {
 
-    private Long id;
+
 
     public Caterpillar() {
         super(0.01, 1000, 0, 0,

@@ -11,7 +11,6 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBeh
 
 public class Deer extends Animal {
 
-    private Long id;
 
     public Deer() {
         super(300, 20, 4, 50,

@@ -14,7 +14,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultReproducing
 
 public class Fox extends Animal {
 
-    private Long id;
+
     public Fox() {
         super(8, 30, 2, 2,
                 new CarnivoreEatingBehavior(),

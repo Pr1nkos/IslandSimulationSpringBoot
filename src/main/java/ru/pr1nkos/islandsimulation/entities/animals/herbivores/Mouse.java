@@ -14,7 +14,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBeh
 
 public class Mouse extends Animal {
 
-    private Long id;
+
 
     public Mouse() {
         super(0.05, 500, 1, 0.01,

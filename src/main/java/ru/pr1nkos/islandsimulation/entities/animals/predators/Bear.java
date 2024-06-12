@@ -13,7 +13,6 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultReproducing
 
 public class Bear extends Animal {
 
-    private Long id;
 
     public Bear() {
         super(500, 5, 2, 80,

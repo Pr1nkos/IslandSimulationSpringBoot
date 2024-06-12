@@ -11,7 +11,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultReproducing
 @Data
 
 public class Wolf extends Animal {
-    private Long id;
+
 
     public Wolf() {
         super(50, 30, 3, 8,

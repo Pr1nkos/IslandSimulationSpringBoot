@@ -7,6 +7,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultReproducing
 import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBehavior;
 
 public class Duck extends Animal {
+
     public Duck() {
         super(1, 200, 4, 0.15,
                 new HerbivoreEatingBehavior(),

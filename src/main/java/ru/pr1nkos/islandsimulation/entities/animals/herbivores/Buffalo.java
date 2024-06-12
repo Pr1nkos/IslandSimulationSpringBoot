@@ -14,7 +14,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBeh
 
 public class Buffalo extends Animal {
 
-    private Long id;
+
 
     public Buffalo() {
         super(700, 10, 3, 100,

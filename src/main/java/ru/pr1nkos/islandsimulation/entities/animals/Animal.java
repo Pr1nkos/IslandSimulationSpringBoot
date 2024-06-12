@@ -1,6 +1,7 @@
 package ru.pr1nkos.islandsimulation.entities.animals;
 
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
@@ -11,11 +12,12 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 @RequiredArgsConstructor
+@Data
 public abstract class Animal implements EatingBehavior, MovingBehavior, ReproducingBehavior {
 
     private Long id;
     protected BigDecimal weight;
-    protected int maxCountPerCell;
+    private int baseMaxCountPerLocation;
     protected int maxSpeed;
     protected BigDecimal foodNeed;
 
@@ -30,7 +32,7 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
                      EatingBehavior eatingBehavior, MovingBehavior movingBehavior, ReproducingBehavior reproducingBehavior) {
         Random random = new Random();
         this.weight = BigDecimal.valueOf(baseWeight + (random.nextDouble() * 10 - 5)); // Случайное отклонение ±5
-        this.maxCountPerCell = baseMaxCountPerLocation;
+        this.baseMaxCountPerLocation = baseMaxCountPerLocation;
         this.maxSpeed = baseMaxSpeed + random.nextInt(3) - 1; // Случайное отклонение ±1
         this.foodNeed = BigDecimal.valueOf(baseFoodNeeded + (random.nextDouble() * 2 - 1)); // Случайное отклонение ±1
         this.eatingBehavior = eatingBehavior;

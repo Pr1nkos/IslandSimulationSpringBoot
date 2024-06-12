@@ -13,7 +13,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultReproducing
 
 public class Boa extends Animal {
 
-    private Long id;
+
 
     public Boa() {
         super(15, 30, 1, 3,

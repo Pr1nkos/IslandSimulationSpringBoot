@@ -15,7 +15,6 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBeh
 public class Rabbit extends Animal {
 
 
-    private Long id;
 
     public Rabbit() {
         super(2, 150, 2, 0.45,

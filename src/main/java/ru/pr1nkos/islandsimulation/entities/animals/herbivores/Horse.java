@@ -14,7 +14,6 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBeh
 
 public class Horse extends Animal {
 
-    private Long id;
 
     public Horse() {
         super(400, 20, 4, 60,

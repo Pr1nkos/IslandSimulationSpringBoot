@@ -1,56 +1,53 @@
 package ru.pr1nkos.islandsimulation.controllers;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
-import ru.pr1nkos.islandsimulation.services.AnimalService;
 import ru.pr1nkos.islandsimulation.services.IslandService;
-import ru.pr1nkos.islandsimulation.services.PlantService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/api")
 public class IslandController {
-    private static final String INDEX = "index.html";
-    private final AnimalService animalService;
-    private final PlantService plantService;
+
     private final IslandService islandService;
-
-    @GetMapping("/animals")
-    public ResponseEntity<?> getAllAnimals() {
-        return ResponseEntity.ok(animalService.getAllAnimals());
-    }
-
-    @SneakyThrows
-    @PostMapping("/animals/predator")
-    public String addPredator(@RequestParam PredatorType predatorType, Model model) {
-        islandService.addPredator(predatorType);
-        String[][] island = islandService.getIsland();
-        model.addAttribute("island", island);
-
-        return INDEX;
-    }
-
-    @SneakyThrows
-    @PostMapping("/animals/herbivore")
-    public String addHerbivore(@RequestParam HerbivoreType herbivoreType, Model model) {
-        islandService.addHerbivore(herbivoreType);
-        String[][] island = islandService.getIsland();
-        model.addAttribute("island", island);
-        return INDEX;
-    }
-
 
     @GetMapping("/island")
     public String getIsland(Model model) {
         String[][] island = islandService.getIsland();
         model.addAttribute("island", island);
-        return INDEX;
+        return "index";
     }
+
+
+    @PostMapping("/animals/predator")
+    public ResponseEntity<Void> addPredator(@RequestParam PredatorType predatorType) {
+        islandService.addPredator(predatorType);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/animals/herbivore")
+    public ResponseEntity<Void> addHerbivore(@RequestParam HerbivoreType herbivoreType) {
+        islandService.addHerbivore(herbivoreType);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/island/cell")
+    public ResponseEntity<List<String>> getCellAnimalSymbols(@RequestParam int x, @RequestParam int y) {
+        try {
+            List<String> animalSymbols = islandService.getAnimalSymbolsInCell(x, y);
+            return ResponseEntity.ok(animalSymbols);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }
