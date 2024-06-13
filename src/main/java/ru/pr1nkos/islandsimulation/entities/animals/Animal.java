@@ -16,11 +16,14 @@ import java.util.Random;
 public abstract class Animal implements EatingBehavior, MovingBehavior, ReproducingBehavior {
 
     private Long id;
-    protected BigDecimal weight;
-    private int baseMaxCountPerLocation;
-    protected int maxSpeed;
-    protected BigDecimal foodNeed;
 
+    protected BigDecimal weight;
+
+    private int baseMaxCountPerLocation;
+
+    protected int maxSpeed;
+
+    protected BigDecimal foodNeed;
 
     protected EatingBehavior eatingBehavior;
 
@@ -31,10 +34,10 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
     protected Animal(double baseWeight, int baseMaxCountPerLocation, int baseMaxSpeed, double baseFoodNeeded,
                      EatingBehavior eatingBehavior, MovingBehavior movingBehavior, ReproducingBehavior reproducingBehavior) {
         Random random = new Random();
-        this.weight = BigDecimal.valueOf(baseWeight + (random.nextDouble() * 10 - 5)); // Случайное отклонение ±5
+        this.weight = BigDecimal.valueOf(baseWeight + (random.nextDouble() * 10 - 5));
         this.baseMaxCountPerLocation = baseMaxCountPerLocation;
-        this.maxSpeed = baseMaxSpeed + random.nextInt(3) - 1; // Случайное отклонение ±1
-        this.foodNeed = BigDecimal.valueOf(baseFoodNeeded + (random.nextDouble() * 2 - 1)); // Случайное отклонение ±1
+        this.maxSpeed = Math.max(0, baseMaxSpeed - random.nextInt(baseMaxSpeed));
+        this.foodNeed = BigDecimal.valueOf(baseFoodNeeded + (random.nextDouble() * 2 - 1));
         this.eatingBehavior = eatingBehavior;
         this.movingBehavior = movingBehavior;
         this.reproducingBehavior = reproducingBehavior;

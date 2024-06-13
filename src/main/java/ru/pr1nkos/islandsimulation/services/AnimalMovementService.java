@@ -1,7 +1,9 @@
 package ru.pr1nkos.islandsimulation.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
+import ru.pr1nkos.islandsimulation.pojo.IslandData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +11,14 @@ import java.util.Map;
 import java.util.Random;
 
 @Service
+@RequiredArgsConstructor
 public class AnimalMovementService {
 
-    private final IslandService islandService;
     private final Random random = new Random();
-
-    public AnimalMovementService(IslandService islandService) {
-        this.islandService = islandService;
-    }
+    private final IslandData islandData;
 
     public void moveAnimals() {
-        Map<String, List<Animal>> islandMap = islandService.getIslandData().getIslandMap();
+        Map<String, List<Animal>> islandMap = islandData.getIslandMap();
         List<AnimalMovement> movements = new ArrayList<>();
 
         for (Map.Entry<String, List<Animal>> entry : islandMap.entrySet()) {
@@ -27,12 +26,10 @@ public class AnimalMovementService {
             List<Animal> animals = entry.getValue();
 
             for (Animal animal : animals) {
-                // Убираем животное из текущей клетки
-                movements.add(new AnimalMovement(animal, key, getRandomNeighbor(key)));
+                movements.add(new AnimalMovement(animal, key, getRandomNeighbor(key, animal.getMaxSpeed())));
             }
         }
 
-        // Применяем все движения после завершения итерации
         for (AnimalMovement movement : movements) {
             List<Animal> currentCell = islandMap.get(movement.currentKey);
             List<Animal> newCell = islandMap.get(movement.newKey);
@@ -40,21 +37,18 @@ public class AnimalMovementService {
             currentCell.remove(movement.animal);
             newCell.add(movement.animal);
         }
-
-        // После завершения перемещений вызываем обновление острова
-        islandService.updateIsland();
     }
 
-    private String getRandomNeighbor(String key) {
+    private String getRandomNeighbor(String key, int maxSpeed) {
         String[] parts = key.split(",");
         int x = Integer.parseInt(parts[0]);
         int y = Integer.parseInt(parts[1]);
 
-        int newX = x + random.nextInt(3) - 1; // -1, 0, 1
-        int newY = y + random.nextInt(3) - 1; // -1, 0, 1
+        int newX = x + random.nextInt(2 * maxSpeed + 1) - maxSpeed;
+        int newY = y + random.nextInt(2 * maxSpeed + 1) - maxSpeed;
 
-        newX = Math.max(0, Math.min(99, newX)); // Остров ограничен размером 100x20
-        newY = Math.max(0, Math.min(19, newY));
+        newX = Math.max(0, Math.min(newX, 99));
+        newY = Math.max(0, Math.min(newY, 19));
 
         return newX + "," + newY;
     }

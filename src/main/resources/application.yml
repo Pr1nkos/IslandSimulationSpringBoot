@@ -1,3 +1,6 @@
 spring:
     application:
         name: IslandSimulation
+island:
+    width: 100
+    height: 20
