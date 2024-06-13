@@ -87,4 +87,11 @@ public class IslandService {
         return symbols;
     }
 
+
+    public void moveAnimal(Animal animal, String oldKey, String newKey) {
+        if (islandMap.containsKey(oldKey) && islandMap.containsKey(newKey)) {
+            islandMap.get(oldKey).remove(animal);
+            islandMap.get(newKey).add(animal);
+        }
+    }
 }
