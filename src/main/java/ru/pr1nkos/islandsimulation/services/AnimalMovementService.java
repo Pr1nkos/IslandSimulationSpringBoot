@@ -19,7 +19,7 @@ public class AnimalMovementService {
     }
 
     public void moveAnimals() {
-        Map<String, List<Animal>> islandMap = islandService.getIslandMap();
+        Map<String, List<Animal>> islandMap = islandService.getIslandData().getIslandMap();
         List<AnimalMovement> movements = new ArrayList<>();
 
         for (Map.Entry<String, List<Animal>> entry : islandMap.entrySet()) {
@@ -40,6 +40,9 @@ public class AnimalMovementService {
             currentCell.remove(movement.animal);
             newCell.add(movement.animal);
         }
+
+        // После завершения перемещений вызываем обновление острова
+        islandService.updateIsland();
     }
 
     private String getRandomNeighbor(String key) {

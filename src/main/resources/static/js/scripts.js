@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`/api/island`)
             .then(response => response.json())
             .then(data => {
-                // Очистите карту перед обновлением
+                // Очищаем карту перед обновлением
                 document.querySelector('.island').innerHTML = '';
 
-                // Пройдитесь по строкам и столбцам острова
+                // Проходимся по строкам и столбцам острова
                 data.forEach((row, rowIndex) => {
                     let rowElement = document.createElement('div');
                     rowElement.classList.add('row');
@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             })
             .catch(error => console.error('Error fetching island data:', error));
+        setTimeout(function() {
+            location.reload();
+        }, 5000);
     }
 
     // Функция для добавления случайного животного
@@ -46,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch(`/api/animals/predator?predatorType=${randomPredator}`, { method: 'POST' })
                 .then(response => {
                     if (response.ok) {
-                        updateIsland();
+                        location.reload()
                     } else {
                         console.error('Failed to add predator');
                     }
@@ -57,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch(`/api/animals/herbivore?herbivoreType=${randomHerbivore}`, { method: 'POST' })
                 .then(response => {
                     if (response.ok) {
-                        updateIsland();
+                        location.reload()
                     } else {
                         console.error('Failed to add herbivore');
                     }
@@ -68,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Обновляем остров каждые 5 секунд
     setInterval(addRandomAnimal, 5000);
-
     // Инициализация острова
     updateIsland();
 
@@ -117,38 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching cell details:', error));
     }
 
-    // Функция для закрытия модального окна
-    function closeModal() {
-        document.getElementById('modal').style.display = 'none';
-    }
-
-    // Функция для добавления хищника
-    function addPredator() {
-        const predatorType = predatorTypeSelect.value;
-        fetch(`/api/animals/predator?predatorType=${predatorType}`, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    updateIsland();
-                } else {
-                    console.error('Failed to add predator');
-                }
-            })
-            .catch(error => console.error('Error adding predator:', error));
-    }
-
-    // Функция для добавления травоядного
-    function addHerbivore() {
-        const herbivoreType = herbivoreTypeSelect.value;
-        fetch(`/api/animals/herbivore?herbivoreType=${herbivoreType}`, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    updateIsland();
-                } else {
-                    console.error('Failed to add herbivore');
-                }
-            })
-            .catch(error => console.error('Error adding herbivore:', error));
-    }
 
     // Заполняем выпадающие списки типами хищников и травоядных
     fetch(`/api/enums/predatorTypes`)
@@ -177,3 +147,36 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => console.error('Error fetching herbivore types:', error));
 });
+// Функция для закрытия модального окна
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+}
+
+// Функция для добавления хищника
+function addPredator() {
+    const predatorType = predatorTypeSelect.value;
+    fetch(`/api/animals/predator?predatorType=${predatorType}`, { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                updateIsland();
+            } else {
+                console.error('Failed to add predator');
+            }
+        })
+        .catch(error => console.error('Error adding predator:', error));
+}
+
+// Функция для добавления травоядного
+function addHerbivore() {
+    const herbivoreType = herbivoreTypeSelect.value;
+    fetch(`/api/animals/herbivore?herbivoreType=${herbivoreType}`, { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                updateIsland();
+            } else {
+                console.error('Failed to add herbivore');
+            }
+        })
+        .catch(error => console.error('Error adding herbivore:', error));
+}
+

@@ -1,40 +1,30 @@
 package ru.pr1nkos.islandsimulation.services;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.factory.AnimalFactory;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
+import ru.pr1nkos.islandsimulation.pojo.IslandData;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @Data
 @Service
+@RequiredArgsConstructor
 public class IslandService {
 
     private final AnimalFactory animalFactory;
     private final AnimalService animalService;
-    private final Map<String, List<Animal>> islandMap;
     private final Random random = new Random();
     private final AnimalSymbolService animalSymbolService;
+    private final IslandData islandData;
 
-    public IslandService(AnimalFactory animalFactory, AnimalService animalService, AnimalSymbolService animalSymbolService) {
-        this.animalFactory = animalFactory;
-        this.animalService = animalService;
-        this.islandMap = new HashMap<>();
-        this.animalSymbolService = animalSymbolService;
-        initializeIsland();
-    }
-
-    private void initializeIsland() {
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 20; j++) {
-                String key = i + "," + j;
-                islandMap.put(key, new ArrayList<>());
-            }
-        }
-    }
 
     public void addPredator(PredatorType predatorType) {
         Animal animal = animalFactory.createAnimal(predatorType);
@@ -49,29 +39,32 @@ public class IslandService {
     }
 
     private void placeAnimalOnIsland(Animal animal) {
+        Map<String, List<Animal>> islandMap = islandData.getIslandMap();
         int x, y;
         do {
             x = random.nextInt(100);
             y = random.nextInt(20);
-        } while (!canPlaceAnimal(x, y));
+        } while (!canPlaceAnimal(x, y, islandMap));
 
         String key = x + "," + y;
         islandMap.get(key).add(animal);
     }
 
-    private boolean canPlaceAnimal(int x, int y) {
+    private boolean canPlaceAnimal(int x, int y, Map<String, List<Animal>> islandMap) {
         String key = x + "," + y;
-        List<Animal> animals = islandMap.get(key);
+        List<Animal> animals = islandMap.getOrDefault(key, new ArrayList<>());
         return animals.size() < 10;
     }
 
     public String[][] getIsland() {
         String[][] island = new String[100][20];
+        Map<String, List<Animal>> islandMap = islandData.getIslandMap();
+
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 20; j++) {
                 String key = i + "," + j;
-                List<Animal> animals = islandMap.get(key);
-                island[i][j] = animals.isEmpty() ? "" : animals.size() + "";
+                List<Animal> animals = islandMap.getOrDefault(key, new ArrayList<>());
+                island[i][j] = animals.isEmpty() ? "" : String.valueOf(animals.size());
             }
         }
         return island;
@@ -79,7 +72,8 @@ public class IslandService {
 
     public List<String> getAnimalSymbolsInCell(int x, int y) {
         String key = x + "," + y;
-        List<Animal> animals = islandMap.get(key);
+        Map<String, List<Animal>> islandMap = islandData.getIslandMap();
+        List<Animal> animals = islandMap.getOrDefault(key, new ArrayList<>());
         List<String> symbols = new ArrayList<>();
         for (Animal animal : animals) {
             symbols.add(animalSymbolService.getAnimalSymbol(animal));
@@ -87,11 +81,16 @@ public class IslandService {
         return symbols;
     }
 
+    public void updateIsland() {
+        String[][] island = new String[100][20];
+        Map<String, List<Animal>> islandMap = islandData.getIslandMap();
 
-    public void moveAnimal(Animal animal, String oldKey, String newKey) {
-        if (islandMap.containsKey(oldKey) && islandMap.containsKey(newKey)) {
-            islandMap.get(oldKey).remove(animal);
-            islandMap.get(newKey).add(animal);
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 20; j++) {
+                String key = i + "," + j;
+                List<Animal> animals = islandMap.getOrDefault(key, new ArrayList<>());
+                island[i][j] = animals.isEmpty() ? "" : String.valueOf(animals.size());
+            }
         }
     }
 }
