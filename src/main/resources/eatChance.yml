@@ -1,0 +1,288 @@
+eating-chances:
+  wolf:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 10
+    deer: 15
+    rabbit: 60
+    mouse: 80
+    goat: 60
+    sheep: 70
+    boar: 15
+    buffalo: 10
+    duck: 40
+    caterpillar: 0
+    plants: 0
+
+  boa:
+    wolf: 0
+    boa: 0
+    fox: 15
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 20
+    rabbit: 40
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 10
+    caterpillar: 0
+    plants: 0
+
+  fox:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 70
+    rabbit: 90
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 60
+    caterpillar: 40
+    plants: 0
+
+  bear:
+    wolf: 0
+    boa: 80
+    fox: 0
+    bear: 0
+    eagle: 40
+    horse: 80
+    deer: 80
+    rabbit: 90
+    mouse: 70
+    goat: 70
+    sheep: 50
+    boar: 20
+    buffalo: 10
+    duck: 0
+    caterpillar: 0
+    plants: 0
+
+  eagle:
+    wolf: 0
+    boa: 0
+    fox: 10
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 90
+    rabbit: 90
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 80
+    caterpillar: 0
+    plants: 0
+
+  horse:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 0
+    plants: 100
+
+  deer:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 0
+    plants: 100
+
+  rabbit:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 90
+    plants: 100
+
+  mouse:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 0
+    plants: 100
+
+  goat:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 50
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 90
+    plants: 100
+
+  sheep:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 0
+    plants: 100
+
+  boar:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 90
+    caterpillar: 100
+    plants: 100
+
+  buffalo:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 0
+    plants: 100
+
+  duck:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 90
+    plants: 100
+
+  caterpillar:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 0
+    plants: 100
+
+  plants:
+    wolf: 0
+    boa: 0
+    fox: 0
+    bear: 0
+    eagle: 0
+    horse: 0
+    deer: 0
+    rabbit: 0
+    mouse: 0
+    goat: 0
+    sheep: 0
+    boar: 0
+    buffalo: 0
+    duck: 0
+    caterpillar: 0
+    plants: 0

@@ -1,11 +1,16 @@
 package ru.pr1nkos.islandsimulation.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.pr1nkos.islandsimulation.dto.UpdateConfigDto;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
 import ru.pr1nkos.islandsimulation.services.AnimalManagementService;
@@ -21,6 +26,9 @@ public class IslandController {
     private final AnimalManagementService animalManagementService;
     private final IslandInformationService islandInformationService;
 
+    @Value("${update.interval}")
+    private int updateInterval;
+
     @GetMapping("/island")
     public String getIsland(Model model) {
         String[][] island = islandInformationService.getIsland();
@@ -28,6 +36,12 @@ public class IslandController {
         return "index";
     }
 
+
+    @GetMapping("/update-config")
+    public ResponseEntity<UpdateConfigDto> getUpdateConfig() {
+        UpdateConfigDto configDto = new UpdateConfigDto(updateInterval);
+        return ResponseEntity.ok(configDto);
+    }
 
     @PostMapping("/animals/predator")
     public ResponseEntity<Void> addPredator(@RequestParam PredatorType predatorType) {

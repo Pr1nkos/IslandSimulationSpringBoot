@@ -1,0 +1,343 @@
+animal-characteristics:
+  #  хищники
+
+  wolf:
+    baseWeight: 50
+    baseMaxCountPerLocation: 30
+    baseMaxSpeed: 3
+    baseFoodNeeded: 8
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 10
+      deer: 15
+      rabbit: 60
+      mouse: 80
+      goat: 60
+      sheep: 70
+      boar: 15
+      buffalo: 10
+      duck: 40
+      caterpillar: 0
+      plants: 0
+
+  bear:
+    baseWeight: 8
+    baseMaxCountPerLocation: 30
+    baseMaxSpeed: 2
+    baseFoodNeeded: 2
+    eating-chances:
+      wolf: 0
+      boa: 80
+      fox: 0
+      bear: 0
+      eagle: 40
+      horse: 80
+      deer: 80
+      rabbit: 90
+      mouse: 70
+      goat: 70
+      sheep: 50
+      boar: 20
+      buffalo: 10
+      duck: 0
+      caterpillar: 0
+      plants: 0
+
+  boa:
+    baseWeight: 15
+    baseMaxCountPerLocation: 30
+    baseMaxSpeed: 1
+    baseFoodNeeded: 3
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 15
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 20
+      rabbit: 40
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 10
+      caterpillar: 0
+      plants: 0
+
+  eagle:
+    baseWeight: 6
+    baseMaxCountPerLocation: 20
+    baseMaxSpeed: 3
+    baseFoodNeeded: 1
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 10
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 90
+      rabbit: 90
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 80
+      caterpillar: 0
+      plants: 0
+
+  fox:
+    baseWeight: 8
+    baseMaxCountPerLocation: 30
+    baseMaxSpeed: 2
+    baseFoodNeeded: 2
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 70
+      rabbit: 90
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 60
+      caterpillar: 40
+      plants: 0
+
+  #   травоядные
+  boar:
+    baseWeight: 400
+    baseMaxCountPerLocation: 50
+    baseMaxSpeed: 2
+    baseFoodNeeded: 50
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 90
+      caterpillar: 100
+      plants: 100
+  buffalo:
+    baseWeight: 700
+    baseMaxCountPerLocation: 10
+    baseMaxSpeed: 1
+    baseFoodNeeded: 100
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 0
+      plants: 100
+  caterpillar:
+    baseWeight: 0.01
+    baseMaxCountPerLocation: 1000
+    baseMaxSpeed: 0
+    baseFoodNeeded: 0
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 0
+      plants: 100
+  deer:
+    baseWeight: 300
+    baseMaxCountPerLocation: 20
+    baseMaxSpeed: 4
+    baseFoodNeeded: 50
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 0
+      plants: 100
+
+  duck:
+    baseWeight: 1
+    baseMaxCountPerLocation: 200
+    baseMaxSpeed: 4
+    baseFoodNeeded: 0.15
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 90
+      plants: 100
+
+  goat:
+    baseWeight: 60
+    baseMaxCountPerLocation: 140
+    baseMaxSpeed: 3
+    baseFoodNeeded: 10
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 50
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 90
+      plants: 100
+  horse:
+    baseWeight: 400
+    baseMaxCountPerLocation: 20
+    baseMaxSpeed: 4
+    baseFoodNeeded: 60
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 0
+      plants: 100
+
+  mouse:
+    baseWeight: 0.05
+    baseMaxCountPerLocation: 500
+    baseMaxSpeed: 1
+    baseFoodNeeded: 0.01
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 0
+      plants: 100
+  rabbit:
+    baseWeight: 2
+    baseMaxCountPerLocation: 150
+    baseMaxSpeed: 2
+    baseFoodNeeded: 0.45
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 90
+      plants: 100
+
+  sheep:
+    baseWeight: 70
+    baseMaxCountPerLocation: 140
+    baseMaxSpeed: 3
+    baseFoodNeeded: 15
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 0
+      plants: 100

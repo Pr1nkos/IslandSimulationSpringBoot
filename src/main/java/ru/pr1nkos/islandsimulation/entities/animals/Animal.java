@@ -1,60 +1,95 @@
 package ru.pr1nkos.islandsimulation.entities.animals;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
-
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+@AllArgsConstructor
 @RequiredArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = false)
 public abstract class Animal implements EatingBehavior, MovingBehavior, ReproducingBehavior {
 
-    private Long id;
-
     protected BigDecimal weight;
-
     private int baseMaxCountPerLocation;
-
     protected int maxSpeed;
-
     protected BigDecimal foodNeed;
-
     protected EatingBehavior eatingBehavior;
-
     protected MovingBehavior movingBehavior;
-
     protected ReproducingBehavior reproducingBehavior;
+    private boolean isAlive;
+    private Map<String, Integer> eatingChances;
+    Random random = new Random();
+    private int x;
+    private int y;
 
-    protected Animal(double baseWeight, int baseMaxCountPerLocation, int baseMaxSpeed, double baseFoodNeeded,
-                     EatingBehavior eatingBehavior, MovingBehavior movingBehavior, ReproducingBehavior reproducingBehavior) {
-        Random random = new Random();
-        this.weight = BigDecimal.valueOf(baseWeight + (random.nextDouble() * 10 - 5));
-        this.baseMaxCountPerLocation = baseMaxCountPerLocation;
-        this.maxSpeed = Math.max(0, baseMaxSpeed - random.nextInt(baseMaxSpeed));
-        this.foodNeed = BigDecimal.valueOf(baseFoodNeeded + (random.nextDouble() * 2 - 1));
+    protected Animal(double baseWeight,
+                     int baseMaxCountPerLocation,
+                     int baseMaxSpeed,
+                     double baseFoodNeeded,
+                     EatingBehavior eatingBehavior,
+                     MovingBehavior movingBehavior,
+                     ReproducingBehavior reproducingBehavior,
+                     Map<String, Integer> eatingChances) {
         this.eatingBehavior = eatingBehavior;
         this.movingBehavior = movingBehavior;
         this.reproducingBehavior = reproducingBehavior;
+        this.eatingChances = eatingChances;
+        this.isAlive = true;
+        initialize(baseWeight, baseMaxCountPerLocation, baseMaxSpeed, baseFoodNeeded);
     }
+
+    private void initialize(double baseWeight,
+                            int baseMaxCountPerLocation,
+                            int baseMaxSpeed,
+                            double baseFoodNeeded) {
+        this.weight = BigDecimal.valueOf(baseWeight + (random.nextDouble() * 10 - 5));
+        this.baseMaxCountPerLocation = baseMaxCountPerLocation;
+        this.maxSpeed = Math.max(0, baseMaxSpeed > 0 ? baseMaxSpeed - random.nextInt(baseMaxSpeed) : 0);
+        this.foodNeed = BigDecimal.valueOf(baseFoodNeeded + (random.nextDouble() * 2 - 1));
+        this.isAlive = true;
+    }
+
+
 
     @Override
     public void eat(Animal predator, Animal prey) {
-        eatingBehavior.eat(predator, prey);
+        if (prey.isAlive()) {
+            eatingBehavior.eat(predator, prey);
+            if (!prey.isAlive()) {
+                System.out.println(prey.getClass().getSimpleName() + " был съеден");
+            }
+        } else {
+            System.out.println("Нельзя съесть мертвое животное.");
+        }
     }
 
     @Override
-    public void move() {
-        movingBehavior.move();
+    public void move(Animal animal, Map<String, List<Animal>> islandMap) {
+        if (isAlive()) {
+            movingBehavior.move(animal, islandMap);
+        } else {
+            System.out.println("Мертвое животное не может двигаться.");
+        }
     }
 
+    //TODO Дописать метод
     @Override
     public void reproduce() {
-        reproducingBehavior.reproduce();
+        if (isAlive()) {
+            reproducingBehavior.reproduce();
+        } else {
+            System.out.println("Мертвое животное не может размножаться.");
+        }
     }
+
 }

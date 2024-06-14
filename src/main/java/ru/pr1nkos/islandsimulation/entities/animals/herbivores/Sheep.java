@@ -3,9 +3,11 @@ package ru.pr1nkos.islandsimulation.entities.animals.herbivores;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
-import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultMovingBehavior;
-import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultReproducingBehavior;
-import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBehavior;
+import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
+import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
+import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
+
+import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -13,11 +15,21 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.HerbivoreEatingBeh
 public class Sheep extends Animal {
 
 
-    public Sheep() {
-        super(70, 140, 3, 15,
-                new HerbivoreEatingBehavior(),
-                new DefaultMovingBehavior(),
-                new DefaultReproducingBehavior());
+    public Sheep(double baseWeight,
+                 int baseMaxCountPerLocation,
+                 int baseMaxSpeed,
+                 double baseFoodNeeded,
+                 EatingBehavior eatingBehavior,
+                 MovingBehavior movingBehavior,
+                 ReproducingBehavior reproducingBehavior, Map<String, Integer> eatingChances) {
+        super(baseWeight,
+                baseMaxCountPerLocation,
+                baseMaxSpeed,
+                baseFoodNeeded,
+                eatingBehavior,
+                movingBehavior,
+                reproducingBehavior,
+                eatingChances);
     }
 
 }
