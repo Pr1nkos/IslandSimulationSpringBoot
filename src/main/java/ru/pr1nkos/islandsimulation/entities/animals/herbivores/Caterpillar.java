@@ -9,6 +9,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
+import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;
 
@@ -19,13 +20,16 @@ public class Caterpillar extends Animal {
 
 
 
-    public Caterpillar(double baseWeight,
+    public Caterpillar
+            (double baseWeight,
                        int baseMaxCountPerLocation,
                        int baseMaxSpeed,
                        double baseFoodNeeded,
                        EatingBehavior eatingBehavior,
                        MovingBehavior movingBehavior,
-                       ReproducingBehavior reproducingBehavior, Map<String, Integer> eatingChances) {
+                       ReproducingBehavior reproducingBehavior,
+                       Map<String, Integer> eatingChances,
+                       RandomManager randomManager) {
         super(baseWeight,
                 baseMaxCountPerLocation,
                 baseMaxSpeed,
@@ -33,7 +37,8 @@ public class Caterpillar extends Animal {
                 eatingBehavior,
                 movingBehavior,
                 reproducingBehavior,
-                eatingChances);
+                eatingChances,
+                randomManager);
     }
 
     @Override

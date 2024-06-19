@@ -9,7 +9,6 @@ import ru.pr1nkos.islandsimulation.pojo.IslandData;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -17,42 +16,30 @@ public class AnimalBreedingService {
 
     private final AnimalManagementService animalManagementService;
     private final IslandData islandData;
-    private final Random random = new Random();
+    private final RandomManager randomManager;
 
     public void breedAnimals() {
         Map<String, Cell> islandCells = islandData.getIslandCells();
-
-        // Получаем список всех ячеек
         List<Cell> cells = List.copyOf(islandCells.values());
 
-        // Выбираем случайную ячейку
-        Cell randomCell = cells.get(random.nextInt(cells.size()));
+        Cell randomCell = randomManager.getRandomElement(cells);
 
-        // Получаем список животных в выбранной ячейке
-        List<Animal> animals = randomCell.getAnimals();
+        if (randomCell != null) {
+            List<Animal> animals = randomCell.getAnimals();
+            if (animals.size() >= 2) {
+                int index1 = randomManager.nextInt(animals.size());
+                int index2 = randomManager.nextIntExcluding(animals.size(), index1);
 
-        // Выбираем случайную пару животных для размножения
-        if (animals.size() >= 2) {
-            int index1 = random.nextInt(animals.size());
-            int index2;
-            do {
-                index2 = random.nextInt(animals.size());
-            } while (index1 == index2);
+                Animal animal1 = animals.get(index1);
+                Animal animal2 = animals.get(index2);
 
-            Animal animal1 = animals.get(index1);
-            Animal animal2 = animals.get(index2);
-
-            // Проверяем, что животные одного типа и выполняем размножение с заданной вероятностью
-            if (animal1.getClass() == animal2.getClass() && random.nextDouble() < getBreedingChance()) {
-                AnimalType animalType = animal1.getAnimalType();
-                Animal newAnimal = animalManagementService.createAnimal(animalType);
-                randomCell.addAnimal(newAnimal);
-                System.out.println("New animal of type " + animalType.getType() + " has been born in cell." + animal1.getX() + " " + animal1.getY());
+                if (animal1.getClass() == animal2.getClass() && randomManager.nextDouble() < 0.5) {
+                    AnimalType animalType = animal1.getAnimalType();
+                    Animal newAnimal = animalManagementService.createAnimal(animalType);
+                    randomCell.addAnimal(newAnimal);
+                    System.out.println("New animal of type " + animalType.getType() + " has been born in cell." + animal1.getX() + " " + animal1.getY());
+                }
             }
         }
-    }
-
-    private double getBreedingChance() {
-        return 0.5;
     }
 }

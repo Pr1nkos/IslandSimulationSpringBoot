@@ -19,6 +19,7 @@ public class AnimalMovementService {
 
     private final DefaultMovingBehavior defaultMovingBehavior;
     private final IslandData islandData;
+
     @SneakyThrows
     public void moveAnimals() {
         Map<String, Cell> islandMap = islandData.getIslandCells();

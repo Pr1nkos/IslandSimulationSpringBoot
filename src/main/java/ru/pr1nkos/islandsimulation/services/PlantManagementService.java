@@ -9,14 +9,13 @@ import ru.pr1nkos.islandsimulation.pojo.IslandData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
 public class PlantManagementService {
 
     private final List<Plant> plants = new ArrayList<>();
-    private final Random random = new Random();
+    private final RandomManager randomManager;
     private final IslandData islandData;
 
     public void addPlant() {
@@ -29,8 +28,8 @@ public class PlantManagementService {
         Map<String, Cell> islandCells = islandData.getIslandCells();
         int x, y;
         do {
-            x = random.nextInt(islandData.getIslandConfig().getWidth());
-            y = random.nextInt(islandData.getIslandConfig().getHeight());
+            x = randomManager.nextInt(islandData.getIslandConfig().getWidth());
+            y = randomManager.nextInt(islandData.getIslandConfig().getHeight());
         } while (!canPlacePlant(x, y, islandCells));
 
         plant.setX(x);

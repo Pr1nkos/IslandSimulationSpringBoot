@@ -10,9 +10,9 @@ import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
 import ru.pr1nkos.islandsimulation.entities.plants.Plant;
 import ru.pr1nkos.islandsimulation.pojo.Cell;
+import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;
-import java.util.Random;
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -29,9 +29,11 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
     protected ReproducingBehavior reproducingBehavior;
     private boolean isAlive;
     private Map<String, Integer> eatingChances;
-    Random random = new Random();
     private int x;
     private int y;
+
+
+    private RandomManager randomManager;
 
     protected Animal(double baseWeight,
                      int baseMaxCountPerLocation,
@@ -40,12 +42,14 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
                      EatingBehavior eatingBehavior,
                      MovingBehavior movingBehavior,
                      ReproducingBehavior reproducingBehavior,
-                     Map<String, Integer> eatingChances) {
+                     Map<String, Integer> eatingChances,
+                     RandomManager randomManager) {
         this.eatingBehavior = eatingBehavior;
         this.movingBehavior = movingBehavior;
         this.reproducingBehavior = reproducingBehavior;
         this.eatingChances = eatingChances;
         this.isAlive = true;
+        this.randomManager = randomManager;
         initialize(baseWeight, baseMaxCountPerLocation, baseMaxSpeed, baseFoodNeeded);
     }
 
@@ -53,10 +57,10 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
                             int baseMaxCountPerLocation,
                             int baseMaxSpeed,
                             double baseFoodNeeded) {
-        this.weight = baseWeight + (random.nextDouble() * 10 - 5);
+        this.weight = baseWeight + (randomManager.nextDouble() * 10 - 5);
         this.baseMaxCountPerLocation = baseMaxCountPerLocation;
-        this.maxSpeed = Math.max(0, baseMaxSpeed > 0 ? baseMaxSpeed - random.nextInt(baseMaxSpeed) : 0);
-        this.foodNeed = baseFoodNeeded + (random.nextDouble() * 2 - 1);
+        this.maxSpeed = Math.max(0, baseMaxSpeed > 0 ? baseMaxSpeed - randomManager.nextInt(baseMaxSpeed) : 0);
+        this.foodNeed = baseFoodNeeded + (randomManager.nextDouble() * 2 - 1);
         this.isAlive = true;
     }
 
@@ -74,8 +78,10 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
 
     @Override
     public void eatPlant(Animal herbivore, Plant plant) {
-        if (plant.isAlive()){
-            herbivore.eatPlant(herbivore, plant);
+        if (plant.isAlive()) {
+            eatingBehavior.eatPlant(herbivore, plant);
+        } else {
+            System.out.println("Нельзя съесть мертвое растение.");
         }
     }
 

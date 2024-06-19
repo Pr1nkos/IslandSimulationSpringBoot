@@ -14,7 +14,6 @@ import ru.pr1nkos.islandsimulation.pojo.IslandData;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 @Service
 @Data
@@ -22,7 +21,7 @@ import java.util.Random;
 public class AnimalManagementService {
 
     private final AnimalFactory animalFactory;
-    private final Random random = new Random();
+    private final RandomManager randomManager;
     private final IslandData islandData;
 
     public void addPredator(PredatorType predatorType) {
@@ -48,37 +47,13 @@ public class AnimalManagementService {
             case null, default -> throw new IllegalArgumentException("Unknown animal type: " + animalType);
         };
     }
-    public void addRandomAnimal(Cell cell) {
-        AnimalType[] animalTypes = {
-                PredatorType.WOLF,
-                PredatorType.BOA,
-                PredatorType.EAGLE,
-                PredatorType.FOX,
-                PredatorType.BEAR,
-                HerbivoreType.HORSE,
-                HerbivoreType.DEER,
-                HerbivoreType.MOUSE,
-                HerbivoreType.SHEEP,
-                HerbivoreType.BUFFALO,
-                HerbivoreType.CATERPILLAR,
-                OmnivoreType.RABBIT,
-                OmnivoreType.GOAT,
-                OmnivoreType.BOAR,
-                OmnivoreType.DUCK
-        };
-
-        AnimalType randomType = animalTypes[random.nextInt(animalTypes.length)];
-
-        Animal animal = animalFactory.createRandomAnimal(randomType);
-        cell.addAnimal(animal);
-    }
 
     private void placeAnimalOnIsland(Animal animal) {
         Map<String, Cell> islandCells = islandData.getIslandCells();
         int x, y;
         do {
-            x = random.nextInt(islandData.getIslandConfig().getWidth());
-            y = random.nextInt(islandData.getIslandConfig().getHeight());
+            x = randomManager.nextInt(islandData.getIslandConfig().getWidth());
+            y = randomManager.nextInt(islandData.getIslandConfig().getHeight());
         } while (!canPlaceAnimal(x, y, islandCells, animal));
 
         animal.setX(x);

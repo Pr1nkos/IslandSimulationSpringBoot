@@ -12,7 +12,6 @@ import ru.pr1nkos.islandsimulation.pojo.IslandData;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
@@ -21,7 +20,7 @@ public class PlantEatingService {
 
     private final PlantEatingBehavior plantEatingBehavior;
     private final PlantManagementService plantManagementService;
-    private final Random random = new Random();
+    private final RandomManager randomManager;
     private final IslandData islandData;
     private final List<Animal> animalsToFeed = new CopyOnWriteArrayList<>(); // Используем CopyOnWriteArrayList для безопасности
 
@@ -52,7 +51,7 @@ public class PlantEatingService {
             System.out.println(herbivore.getClass().getSimpleName().toLowerCase() +
                     " пытается съесть растение с шансом " + chanceToEat / 100);
 
-            double randomValue = random.nextDouble();
+            double randomValue = randomManager.nextDouble();
 
             if (randomValue < (chanceToEat / 100)) {
                 System.out.println("Random value: " + randomValue);
@@ -81,7 +80,7 @@ public class PlantEatingService {
 
     private Plant findPlantForHerbivore(Animal herbivore) {
         List<Plant> possiblePlants = plantManagementService.getPlantsAt(herbivore.getX(), herbivore.getY());
-        return possiblePlants.isEmpty() ? null : possiblePlants.get(random.nextInt(possiblePlants.size()));
+        return possiblePlants.isEmpty() ? null : randomManager.getRandomElement(possiblePlants);
     }
 
     private void eatPlant(Animal herbivore, Plant plant) {

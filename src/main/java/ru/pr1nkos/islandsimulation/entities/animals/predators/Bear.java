@@ -9,6 +9,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
+import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;
 
@@ -17,13 +18,16 @@ import java.util.Map;
 public class Bear extends Animal {
 
 
-    public Bear(double baseWeight,
-                int baseMaxCountPerLocation,
-                int baseMaxSpeed,
-                double baseFoodNeeded,
-                EatingBehavior eatingBehavior,
-                MovingBehavior movingBehavior,
-                ReproducingBehavior reproducingBehavior, Map<String, Integer> eatingChances) {
+    public Bear
+            (double baseWeight,
+             int baseMaxCountPerLocation,
+             int baseMaxSpeed,
+             double baseFoodNeeded,
+             EatingBehavior eatingBehavior,
+             MovingBehavior movingBehavior,
+             ReproducingBehavior reproducingBehavior,
+             Map<String, Integer> eatingChances,
+             RandomManager randomManager) {
         super(baseWeight,
                 baseMaxCountPerLocation,
                 baseMaxSpeed,
@@ -31,7 +35,8 @@ public class Bear extends Animal {
                 eatingBehavior,
                 movingBehavior,
                 reproducingBehavior,
-                eatingChances);
+                eatingChances,
+                randomManager);
     }
 
     @Override

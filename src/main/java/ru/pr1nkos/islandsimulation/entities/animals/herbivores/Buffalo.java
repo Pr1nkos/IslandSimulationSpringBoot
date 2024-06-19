@@ -1,6 +1,5 @@
 package ru.pr1nkos.islandsimulation.entities.animals.herbivores;
 
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
@@ -9,15 +8,13 @@ import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
+import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-
 public class Buffalo extends Animal {
-
-
 
     public Buffalo(double baseWeight,
                    int baseMaxCountPerLocation,
@@ -25,7 +22,9 @@ public class Buffalo extends Animal {
                    double baseFoodNeeded,
                    EatingBehavior eatingBehavior,
                    MovingBehavior movingBehavior,
-                   ReproducingBehavior reproducingBehavior, Map<String, Integer> eatingChances) {
+                   ReproducingBehavior reproducingBehavior,
+                   Map<String, Integer> eatingChances,
+                   RandomManager randomManager) {
         super(baseWeight,
                 baseMaxCountPerLocation,
                 baseMaxSpeed,
@@ -33,8 +32,10 @@ public class Buffalo extends Animal {
                 eatingBehavior,
                 movingBehavior,
                 reproducingBehavior,
-                eatingChances);
+                eatingChances,
+                randomManager);
     }
+
     @Override
     public AnimalType getAnimalType() {
         return HerbivoreType.BUFFALO;

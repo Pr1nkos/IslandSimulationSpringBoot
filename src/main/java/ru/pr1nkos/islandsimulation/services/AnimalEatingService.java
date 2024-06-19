@@ -9,7 +9,6 @@ import ru.pr1nkos.islandsimulation.pojo.IslandData;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
@@ -18,16 +17,14 @@ public class AnimalEatingService {
 
     private final AnimalManagementService animalManagementService;
     private final PredatorEatingBehavior predatorEatingBehavior;
-    private final Random random = new Random();
+    private final RandomManager randomManager;
     private final IslandData islandData;
-    private final List<Animal> animalsToFeed = new CopyOnWriteArrayList<>(); // Используем CopyOnWriteArrayList для безопасности
-
+    private final List<Animal> animalsToFeed = new CopyOnWriteArrayList<>();
 
     public List<Animal> getAnimalsToFeed() {
         animalsToFeed.clear();
         Map<String, Cell> islandCells = islandData.getIslandCells();
 
-        // Перебираем все ячейки острова
         for (Cell cell : islandCells.values()) {
             animalsToFeed.addAll(cell.getAnimals());
         }
@@ -35,9 +32,8 @@ public class AnimalEatingService {
         return animalsToFeed;
     }
 
-
     public void attemptToEat(Animal predator) {
-        while (predator.getFoodNeed() > 0) {
+        do {
             Animal prey = findPreyForPredator(predator);
 
             if (prey == null || !prey.isAlive()) {
@@ -45,8 +41,7 @@ public class AnimalEatingService {
             }
 
             double chanceToEat = getChanceToEat(predator, prey);
-
-            double randomValue = random.nextDouble();
+            double randomValue = randomManager.nextDouble();
 
             if (randomValue < (chanceToEat / 100)) {
                 System.out.println("Random value: " + randomValue);
@@ -58,16 +53,15 @@ public class AnimalEatingService {
             } else if (randomValue > (chanceToEat / 100) && chanceToEat != 0.0) {
                 System.out.println("Random value: " + randomValue);
                 System.out.println("Chance to eat: " + chanceToEat / 100);
-                System.out.println("Добыча сбежала");
+                System.out.println("Prey escaped");
             }
 
             if (predator.getFoodNeed() <= 0) {
                 System.out.println("Predator is full.");
                 break;
             }
-        }
+        } while (true);
     }
-
 
     private Integer getChanceToEat(Animal predator, Animal prey) {
         return predator.getEatingChances().getOrDefault(prey.getClass().getSimpleName().toLowerCase(), 0);
@@ -77,16 +71,11 @@ public class AnimalEatingService {
         List<Animal> possiblePreys = animalManagementService.getAnimalsAt(predator.getX(), predator.getY());
         possiblePreys.remove(predator);
 
-        if (possiblePreys.isEmpty()) {
-            return null;
-        }
-
-        return possiblePreys.get(random.nextInt(possiblePreys.size()));
+        return randomManager.getRandomElement(possiblePreys);
     }
 
     private void eat(Animal predator, Animal prey) {
         predatorEatingBehavior.eat(predator, prey);
         animalManagementService.removeAnimalFromIsland(prey);
     }
-
 }

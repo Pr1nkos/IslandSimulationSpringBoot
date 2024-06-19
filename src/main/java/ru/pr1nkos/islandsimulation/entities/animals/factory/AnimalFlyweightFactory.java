@@ -13,6 +13,7 @@ import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
 import ru.pr1nkos.islandsimulation.enums.OmnivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
 import ru.pr1nkos.islandsimulation.services.AnimalCharacteristicsService;
+import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class AnimalFlyweightFactory {
     private static final Map<String, Animal> omnivoreCache = new HashMap<>();
     private final BehaviorFactory behaviorFactory;
     private final AnimalCharacteristicsService animalCharacteristicsService;
+    private final RandomManager randomManager;
 
     public Animal getAnimal(PredatorType predatorType) {
         String key = predatorType.name();
@@ -65,7 +67,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getEatingBehavior(predatorType.getType()),
                     behaviorFactory.getMovingBehavior(predatorType.getType()),
                     behaviorFactory.getReproducingBehavior(predatorType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case BOA -> new Boa(
                     baseWeight,
@@ -75,7 +78,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getEatingBehavior(predatorType.getType()),
                     behaviorFactory.getMovingBehavior(predatorType.getType()),
                     behaviorFactory.getReproducingBehavior(predatorType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case EAGLE -> new Eagle(
                     baseWeight,
@@ -85,7 +89,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getEatingBehavior(predatorType.getType()),
                     behaviorFactory.getMovingBehavior(predatorType.getType()),
                     behaviorFactory.getReproducingBehavior(predatorType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case FOX -> new Fox(
                     baseWeight,
@@ -95,7 +100,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getEatingBehavior(predatorType.getType()),
                     behaviorFactory.getMovingBehavior(predatorType.getType()),
                     behaviorFactory.getReproducingBehavior(predatorType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case WOLF -> new Wolf(
                     baseWeight,
@@ -105,7 +111,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getEatingBehavior(predatorType.getType()),
                     behaviorFactory.getMovingBehavior(predatorType.getType()),
                     behaviorFactory.getReproducingBehavior(predatorType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
         };
     }
@@ -125,7 +132,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case CATERPILLAR -> new Caterpillar(
                     baseWeight,
@@ -135,7 +143,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case DEER -> new Deer(
                     baseWeight,
@@ -145,7 +154,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case HORSE -> new Horse(
                     baseWeight,
@@ -155,7 +165,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case MOUSE -> new Mouse(
                     baseWeight,
@@ -165,7 +176,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case SHEEP -> new Sheep(
                     baseWeight,
@@ -175,7 +187,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
         };
     }
@@ -195,7 +208,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getOmnivoresEatingBehavior(omnivoreType.getType()),
                     behaviorFactory.getMovingBehavior(omnivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(omnivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case DUCK -> new Duck(
                     baseWeight,
@@ -205,7 +219,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getOmnivoresEatingBehavior(omnivoreType.getType()),
                     behaviorFactory.getMovingBehavior(omnivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(omnivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case GOAT -> new Goat(
                     baseWeight,
@@ -215,7 +230,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getOmnivoresEatingBehavior(omnivoreType.getType()),
                     behaviorFactory.getMovingBehavior(omnivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(omnivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
             case RABBIT -> new Rabbit(
                     baseWeight,
@@ -225,7 +241,8 @@ public class AnimalFlyweightFactory {
                     behaviorFactory.getOmnivoresEatingBehavior(omnivoreType.getType()),
                     behaviorFactory.getMovingBehavior(omnivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(omnivoreType.getType()),
-                    eatingChances
+                    eatingChances,
+                    randomManager
             );
         };
     }
