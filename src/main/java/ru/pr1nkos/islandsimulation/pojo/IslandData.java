@@ -5,11 +5,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.config.IslandConfig;
-import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Component
@@ -18,19 +15,23 @@ import java.util.Map;
 public class IslandData {
 
     private final IslandConfig islandConfig;
-    private Map<String, List<Animal>> islandMap;
+    private Map<String, Cell> islandCells; // Используем одну карту для ячеек острова
 
     @PostConstruct
     private void initializeIsland() {
-        this.islandMap = new HashMap<>();
+        this.islandCells = new HashMap<>();
         int width = islandConfig.getWidth();
         int height = islandConfig.getHeight();
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 String key = i + "," + j;
-                islandMap.put(key, new ArrayList<>());
+                islandCells.put(key, new Cell());
             }
         }
+        for (String key : islandCells.keySet()) {
+            System.out.println(key);
+        }
     }
+
 }

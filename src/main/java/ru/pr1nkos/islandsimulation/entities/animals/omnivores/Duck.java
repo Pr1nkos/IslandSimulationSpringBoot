@@ -1,8 +1,6 @@
-package ru.pr1nkos.islandsimulation.entities.animals.herbivores;
+package ru.pr1nkos.islandsimulation.entities.animals.omnivores;
 
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
@@ -10,20 +8,15 @@ import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavi
 
 import java.util.Map;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+public class Duck extends Animal {
 
-public class Rabbit extends Animal {
-
-
-
-    public Rabbit(double baseWeight,
-                  int baseMaxCountPerLocation,
-                  int baseMaxSpeed,
-                  double baseFoodNeeded,
-                  EatingBehavior eatingBehavior,
-                  MovingBehavior movingBehavior,
-                  ReproducingBehavior reproducingBehavior, Map<String, Integer> eatingChances) {
+    public Duck(double baseWeight,
+                int baseMaxCountPerLocation,
+                int baseMaxSpeed,
+                double baseFoodNeeded,
+                EatingBehavior eatingBehavior,
+                MovingBehavior movingBehavior,
+                ReproducingBehavior reproducingBehavior, Map<String, Integer> eatingChances) {
         super(baseWeight,
                 baseMaxCountPerLocation,
                 baseMaxSpeed,
@@ -33,5 +26,4 @@ public class Rabbit extends Animal {
                 reproducingBehavior,
                 eatingChances);
     }
-
 }

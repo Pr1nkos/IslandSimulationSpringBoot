@@ -1,40 +1,40 @@
 package ru.pr1nkos.islandsimulation.entities.animals.behaviors;
 
+import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
+import ru.pr1nkos.islandsimulation.pojo.Cell;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+@Component
 public class DefaultMovingBehavior implements MovingBehavior {
     private final Random random = new Random();
 
     @Override
-    public void move(Animal animal, Map<String, List<Animal>> islandMap) {
+    public void move(Animal animal, Map<String, Cell> islandMap) {
         String currentKey = findCurrentPosition(animal, islandMap);
         if (animal.getMaxSpeed() == 0) {
             System.out.println("This animal cannot move because maxSpeed is 0.");
         } else {
             String newKey = getRandomNeighbor(currentKey, animal.getMaxSpeed());
             if (currentKey != null && islandMap.containsKey(newKey)) {
-                List<Animal> animalsInNewCell = islandMap.get(newKey);
-                if (animalsInNewCell.size() < animal.getBaseMaxCountPerLocation()) {
-
-                    islandMap.get(currentKey).remove(animal);
-                    islandMap.get(newKey).add(animal);
+                Cell currentCell = islandMap.get(currentKey);
+                Cell newCell = islandMap.get(newKey);
+                if (newCell.getAnimals().size() < animal.getBaseMaxCountPerLocation()) {
+                    currentCell.removeAnimal(animal);
+                    newCell.addAnimal(animal);
                 } else {
                     System.out.println("Cannot add animal. Max count per location exceeded.");
-
                 }
             }
         }
     }
 
-
-    private String findCurrentPosition(Animal animal, Map<String, List<Animal>> islandMap) {
-        for (Map.Entry<String, List<Animal>> entry : islandMap.entrySet()) {
-            if (entry.getValue().contains(animal)) {
+    private String findCurrentPosition(Animal animal, Map<String, Cell> islandMap) {
+        for (Map.Entry<String, Cell> entry : islandMap.entrySet()) {
+            if (entry.getValue().getAnimals().contains(animal)) {
                 return entry.getKey();
             }
         }
@@ -42,6 +42,10 @@ public class DefaultMovingBehavior implements MovingBehavior {
     }
 
     private String getRandomNeighbor(String key, int maxSpeed) {
+        if (key == null) {
+            return null;
+        }
+
         String[] parts = key.split(",");
         int x = Integer.parseInt(parts[0]);
         int y = Integer.parseInt(parts[1]);
@@ -66,7 +70,4 @@ public class DefaultMovingBehavior implements MovingBehavior {
 
         return newX + "," + newY;
     }
-
-
-
 }

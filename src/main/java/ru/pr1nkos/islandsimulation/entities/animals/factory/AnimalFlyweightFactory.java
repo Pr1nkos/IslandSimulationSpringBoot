@@ -4,8 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.herbivores.*;
+import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Boar;
+import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Duck;
+import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Goat;
+import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Rabbit;
 import ru.pr1nkos.islandsimulation.entities.animals.predators.*;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
+import ru.pr1nkos.islandsimulation.enums.OmnivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
 import ru.pr1nkos.islandsimulation.services.AnimalCharacteristicsService;
 
@@ -17,6 +22,7 @@ import java.util.Map;
 public class AnimalFlyweightFactory {
     private static final Map<String, Animal> predatorCache = new HashMap<>();
     private static final Map<String, Animal> herbivoreCache = new HashMap<>();
+    private static final Map<String, Animal> omnivoreCache = new HashMap<>();
     private final BehaviorFactory behaviorFactory;
     private final AnimalCharacteristicsService animalCharacteristicsService;
 
@@ -34,6 +40,14 @@ public class AnimalFlyweightFactory {
             herbivoreCache.put(key, createHerbivore(herbivoreType));
         }
         return herbivoreCache.get(key);
+    }
+
+    public Animal getAnimal(OmnivoreType omnivoreType) {
+        String key = omnivoreType.name();
+        if (!omnivoreCache.containsKey(key)) {
+        omnivoreCache.put(key, createOmnivores(omnivoreType));
+        }
+        return omnivoreCache.get(key);
     }
 
     private Animal createPredator(PredatorType predatorType) {
@@ -103,22 +117,12 @@ public class AnimalFlyweightFactory {
         int baseMaxSpeed = animalCharacteristicsService.getBaseMaxSpeedForHerbivore(herbivoreType);
         double baseFoodNeeded = animalCharacteristicsService.getbaseFoodNeededForHerbivore(herbivoreType);
         return switch (herbivoreType) {
-            case BOAR -> new Boar(
-                    baseWeight,
-                    baseMaxCountPerLocation,
-                    baseMaxSpeed,
-                    baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
-                    behaviorFactory.getMovingBehavior(herbivoreType.getType()),
-                    behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
-            );
             case BUFFALO -> new Buffalo(
                     baseWeight,
                     baseMaxCountPerLocation,
                     baseMaxSpeed,
                     baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
+                    behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
                     eatingChances
@@ -128,7 +132,7 @@ public class AnimalFlyweightFactory {
                     baseMaxCountPerLocation,
                     baseMaxSpeed,
                     baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
+                    behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
                     eatingChances
@@ -138,27 +142,7 @@ public class AnimalFlyweightFactory {
                     baseMaxCountPerLocation,
                     baseMaxSpeed,
                     baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
-                    behaviorFactory.getMovingBehavior(herbivoreType.getType()),
-                    behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
-            );
-            case DUCK -> new Duck(
-                    baseWeight,
-                    baseMaxCountPerLocation,
-                    baseMaxSpeed,
-                    baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
-                    behaviorFactory.getMovingBehavior(herbivoreType.getType()),
-                    behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
-            );
-            case GOAT -> new Goat(
-                    baseWeight,
-                    baseMaxCountPerLocation,
-                    baseMaxSpeed,
-                    baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
+                    behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
                     eatingChances
@@ -168,7 +152,7 @@ public class AnimalFlyweightFactory {
                     baseMaxCountPerLocation,
                     baseMaxSpeed,
                     baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
+                    behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
                     eatingChances
@@ -178,17 +162,7 @@ public class AnimalFlyweightFactory {
                     baseMaxCountPerLocation,
                     baseMaxSpeed,
                     baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
-                    behaviorFactory.getMovingBehavior(herbivoreType.getType()),
-                    behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
-                    eatingChances
-            );
-            case RABBIT -> new Rabbit(
-                    baseWeight,
-                    baseMaxCountPerLocation,
-                    baseMaxSpeed,
-                    baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
+                    behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
                     eatingChances
@@ -198,9 +172,59 @@ public class AnimalFlyweightFactory {
                     baseMaxCountPerLocation,
                     baseMaxSpeed,
                     baseFoodNeeded,
-                    behaviorFactory.getEatingBehavior(herbivoreType.getType()),
+                    behaviorFactory.getPlantEatingBehavior(herbivoreType.getType()),
                     behaviorFactory.getMovingBehavior(herbivoreType.getType()),
                     behaviorFactory.getReproducingBehavior(herbivoreType.getType()),
+                    eatingChances
+            );
+        };
+    }
+
+    private Animal createOmnivores(OmnivoreType omnivoreType) {
+        Map<String, Integer> eatingChances = animalCharacteristicsService.getChancesForOmnivores(omnivoreType);
+        double baseWeight = animalCharacteristicsService.getBaseWeightForOmnivores(omnivoreType);
+        int baseMaxCountPerLocation = animalCharacteristicsService.getBaseMaxCountPerLocationForOmnivores(omnivoreType);
+        int baseMaxSpeed = animalCharacteristicsService.getBaseMaxSpeedForOmnivores(omnivoreType);
+        double baseFoodNeeded = animalCharacteristicsService.getbaseFoodNeededForOmnivores(omnivoreType);
+        return switch (omnivoreType) {
+            case BOAR -> new Boar(
+                    baseWeight,
+                    baseMaxCountPerLocation,
+                    baseMaxSpeed,
+                    baseFoodNeeded,
+                    behaviorFactory.getOmnivoresEatingBehavior(omnivoreType.getType()),
+                    behaviorFactory.getMovingBehavior(omnivoreType.getType()),
+                    behaviorFactory.getReproducingBehavior(omnivoreType.getType()),
+                    eatingChances
+            );
+            case DUCK -> new Duck(
+                    baseWeight,
+                    baseMaxCountPerLocation,
+                    baseMaxSpeed,
+                    baseFoodNeeded,
+                    behaviorFactory.getOmnivoresEatingBehavior(omnivoreType.getType()),
+                    behaviorFactory.getMovingBehavior(omnivoreType.getType()),
+                    behaviorFactory.getReproducingBehavior(omnivoreType.getType()),
+                    eatingChances
+            );
+            case GOAT -> new Goat(
+                    baseWeight,
+                    baseMaxCountPerLocation,
+                    baseMaxSpeed,
+                    baseFoodNeeded,
+                    behaviorFactory.getOmnivoresEatingBehavior(omnivoreType.getType()),
+                    behaviorFactory.getMovingBehavior(omnivoreType.getType()),
+                    behaviorFactory.getReproducingBehavior(omnivoreType.getType()),
+                    eatingChances
+            );
+            case RABBIT -> new Rabbit(
+                    baseWeight,
+                    baseMaxCountPerLocation,
+                    baseMaxSpeed,
+                    baseFoodNeeded,
+                    behaviorFactory.getOmnivoresEatingBehavior(omnivoreType.getType()),
+                    behaviorFactory.getMovingBehavior(omnivoreType.getType()),
+                    behaviorFactory.getReproducingBehavior(omnivoreType.getType()),
                     eatingChances
             );
         };

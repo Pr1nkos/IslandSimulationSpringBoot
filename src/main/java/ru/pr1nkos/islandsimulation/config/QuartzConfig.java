@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.pr1nkos.islandsimulation.jobs.AnimalEatingJob;
 import ru.pr1nkos.islandsimulation.jobs.AnimalMovementJob;
+import ru.pr1nkos.islandsimulation.jobs.PlantAppearJob;
+import ru.pr1nkos.islandsimulation.jobs.PlantEatingJob;
 
 @Configuration
 public class QuartzConfig {
@@ -20,7 +22,7 @@ public class QuartzConfig {
     @Bean
     public Trigger animalMovementJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(5) // Укажите интервал в секундах
+                .withIntervalInSeconds(5)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -41,7 +43,7 @@ public class QuartzConfig {
     @Bean
     public Trigger animalEatingJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(10) // Интервал в секундах между выполнениями job
+                .withIntervalInSeconds(10)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -50,4 +52,47 @@ public class QuartzConfig {
                 .withSchedule(scheduleBuilder)
                 .build();
     }
+
+    @Bean
+    public JobDetail plantAppearJobDetail() {
+        return JobBuilder.newJob(PlantAppearJob.class)
+                .withIdentity("plantAppearJob")
+                .storeDurably()
+                .build();
+    }
+
+    @Bean
+    public Trigger plantAppearJobTrigger() {
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
+                .withIntervalInSeconds(5)
+                .repeatForever();
+
+        return TriggerBuilder.newTrigger()
+                .forJob(plantAppearJobDetail())
+                .withIdentity("plantAppearTrigger")
+                .withSchedule(scheduleBuilder)
+                .build();
+    }
+
+    @Bean
+    public JobDetail plantEatingJobDetail() {
+        return JobBuilder.newJob(PlantEatingJob.class)
+                .withIdentity("plantEatingJob")
+                .storeDurably()
+                .build();
+    }
+
+    @Bean
+    public Trigger plantEatingJobTrigger() {
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
+                .withIntervalInSeconds(10) // Пример: раз в 15 секунд
+                .repeatForever();
+
+        return TriggerBuilder.newTrigger()
+                .forJob(plantEatingJobDetail())
+                .withIdentity("plantEatingTrigger")
+                .withSchedule(scheduleBuilder)
+                .build();
+    }
 }
+

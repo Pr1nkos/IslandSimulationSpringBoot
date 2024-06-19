@@ -3,6 +3,10 @@ package ru.pr1nkos.islandsimulation.services;
 import org.springframework.stereotype.Service;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.herbivores.*;
+import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Boar;
+import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Duck;
+import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Goat;
+import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Rabbit;
 import ru.pr1nkos.islandsimulation.entities.animals.predators.*;
 
 @Service

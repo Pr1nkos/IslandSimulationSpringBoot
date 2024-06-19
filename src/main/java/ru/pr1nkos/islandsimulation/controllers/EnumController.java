@@ -2,6 +2,7 @@ package ru.pr1nkos.islandsimulation.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.pr1nkos.islandsimulation.enums.OmnivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
 
@@ -21,6 +22,13 @@ public class EnumController {
     @GetMapping("/api/enums/herbivoreTypes")
     public List<String> getHerbivoreTypes() {
         return Arrays.stream(HerbivoreType.values())
+                .map(Enum::name)
+                .toList();
+    }
+
+    @GetMapping("/api/enums/omnivoreTypes")
+    public List<String> getOmnivoreTypes() {
+        return Arrays.stream(OmnivoreType.values())
                 .map(Enum::name)
                 .toList();
     }

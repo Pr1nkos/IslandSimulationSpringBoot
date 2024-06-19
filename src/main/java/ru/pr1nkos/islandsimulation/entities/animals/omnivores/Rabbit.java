@@ -1,4 +1,4 @@
-package ru.pr1nkos.islandsimulation.entities.animals.herbivores;
+package ru.pr1nkos.islandsimulation.entities.animals.omnivores;
 
 
 import lombok.Data;
@@ -13,16 +13,17 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 @Data
 
-public class Goat extends Animal {
+public class Rabbit extends Animal {
 
 
-    public Goat(double baseWeight,
-                int baseMaxCountPerLocation,
-                int baseMaxSpeed,
-                double baseFoodNeeded,
-                EatingBehavior eatingBehavior,
-                MovingBehavior movingBehavior,
-                ReproducingBehavior reproducingBehavior, Map<String, Integer> eatingChances) {
+
+    public Rabbit(double baseWeight,
+                  int baseMaxCountPerLocation,
+                  int baseMaxSpeed,
+                  double baseFoodNeeded,
+                  EatingBehavior eatingBehavior,
+                  MovingBehavior movingBehavior,
+                  ReproducingBehavior reproducingBehavior, Map<String, Integer> eatingChances) {
         super(baseWeight,
                 baseMaxCountPerLocation,
                 baseMaxSpeed,

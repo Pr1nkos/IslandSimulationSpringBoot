@@ -116,7 +116,8 @@ animal-characteristics:
       caterpillar: 40
       plants: 0
 
-  #   травоядные
+#   всеядные
+
   boar:
     baseWeight: 400
     baseMaxCountPerLocation: 50
@@ -139,6 +140,78 @@ animal-characteristics:
       duck: 90
       caterpillar: 100
       plants: 100
+
+  duck:
+    baseWeight: 1
+    baseMaxCountPerLocation: 200
+    baseMaxSpeed: 4
+    baseFoodNeeded: 0.15
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 90
+      plants: 100
+
+  goat:
+    baseWeight: 60
+    baseMaxCountPerLocation: 140
+    baseMaxSpeed: 3
+    baseFoodNeeded: 10
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 50
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 90
+      plants: 100
+
+  rabbit:
+    baseWeight: 2
+    baseMaxCountPerLocation: 150
+    baseMaxSpeed: 2
+    baseFoodNeeded: 0.45
+    eating-chances:
+      wolf: 0
+      boa: 0
+      fox: 0
+      bear: 0
+      eagle: 0
+      horse: 0
+      deer: 0
+      rabbit: 0
+      mouse: 0
+      goat: 0
+      sheep: 0
+      boar: 0
+      buffalo: 0
+      duck: 0
+      caterpillar: 90
+      plants: 100
+
+  #   травоядные
+
   buffalo:
     baseWeight: 700
     baseMaxCountPerLocation: 10
@@ -206,51 +279,7 @@ animal-characteristics:
       caterpillar: 0
       plants: 100
 
-  duck:
-    baseWeight: 1
-    baseMaxCountPerLocation: 200
-    baseMaxSpeed: 4
-    baseFoodNeeded: 0.15
-    eating-chances:
-      wolf: 0
-      boa: 0
-      fox: 0
-      bear: 0
-      eagle: 0
-      horse: 0
-      deer: 0
-      rabbit: 0
-      mouse: 0
-      goat: 0
-      sheep: 0
-      boar: 0
-      buffalo: 0
-      duck: 0
-      caterpillar: 90
-      plants: 100
 
-  goat:
-    baseWeight: 60
-    baseMaxCountPerLocation: 140
-    baseMaxSpeed: 3
-    baseFoodNeeded: 10
-    eating-chances:
-      wolf: 0
-      boa: 0
-      fox: 0
-      bear: 50
-      eagle: 0
-      horse: 0
-      deer: 0
-      rabbit: 0
-      mouse: 0
-      goat: 0
-      sheep: 0
-      boar: 0
-      buffalo: 0
-      duck: 0
-      caterpillar: 90
-      plants: 100
   horse:
     baseWeight: 400
     baseMaxCountPerLocation: 20
@@ -295,28 +324,6 @@ animal-characteristics:
       buffalo: 0
       duck: 0
       caterpillar: 0
-      plants: 100
-  rabbit:
-    baseWeight: 2
-    baseMaxCountPerLocation: 150
-    baseMaxSpeed: 2
-    baseFoodNeeded: 0.45
-    eating-chances:
-      wolf: 0
-      boa: 0
-      fox: 0
-      bear: 0
-      eagle: 0
-      horse: 0
-      deer: 0
-      rabbit: 0
-      mouse: 0
-      goat: 0
-      sheep: 0
-      boar: 0
-      buffalo: 0
-      duck: 0
-      caterpillar: 90
       plants: 100
 
   sheep:

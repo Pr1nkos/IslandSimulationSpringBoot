@@ -7,9 +7,10 @@ import lombok.RequiredArgsConstructor;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
+import ru.pr1nkos.islandsimulation.entities.plants.Plant;
+import ru.pr1nkos.islandsimulation.pojo.Cell;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -59,8 +60,6 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
         this.isAlive = true;
     }
 
-
-
     @Override
     public void eat(Animal predator, Animal prey) {
         if (prey.isAlive()) {
@@ -74,7 +73,14 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
     }
 
     @Override
-    public void move(Animal animal, Map<String, List<Animal>> islandMap) {
+    public void eatPlant(Animal herbivore, Plant plant) {
+        if (plant.isAlive()){
+            herbivore.eatPlant(herbivore, plant);
+        }
+    }
+
+    @Override
+    public void move(Animal animal, Map<String, Cell> islandMap) {
         if (isAlive()) {
             movingBehavior.move(animal, islandMap);
         } else {
@@ -82,7 +88,6 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
         }
     }
 
-    //TODO Дописать метод
     @Override
     public void reproduce() {
         if (isAlive()) {
@@ -91,5 +96,4 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
             System.out.println("Мертвое животное не может размножаться.");
         }
     }
-
 }

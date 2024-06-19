@@ -1,15 +1,17 @@
 let predatorTypeSelect;
 let herbivoreTypeSelect;
+let omnivoreTypeSelect;
 let predatorTypes = [];
 let herbivoreTypes = [];
+let omnivoreTypes = [];
 let isModalOpen = false;
-let updateInterval;
+let updateInterval = 5000; // значение по умолчанию
 
 function fetchConfigAndData() {
     return Promise.all([
-        fetch('/api/update-config').then(response => response.json()),
         fetch('/api/enums/predatorTypes').then(response => response.json()),
-        fetch('/api/enums/herbivoreTypes').then(response => response.json())
+        fetch('/api/enums/herbivoreTypes').then(response => response.json()),
+        fetch('/api/enums/omnivoreTypes').then(response => response.json())
     ]);
 }
 
@@ -17,23 +19,23 @@ function updateIsland() {
     fetch(`/api/island`)
         .then(response => response.json())
         .then(data => {
-            document.querySelector('.island').innerHTML = '';
+            const islandElement = document.querySelector('.island');
+            islandElement.innerHTML = ''; // очищаем содержимое острова перед обновлением
 
             data.forEach((row, rowIndex) => {
-                let rowElement = document.createElement('div');
+                const rowElement = document.createElement('div');
                 rowElement.classList.add('row');
 
                 row.forEach((cell, colIndex) => {
-                    let cellElement = document.createElement('div');
+                    const cellElement = document.createElement('div');
                     cellElement.classList.add('cell');
-                    cellElement.textContent = cell.join(', ');
-
+                    cellElement.textContent = cell || '';
                     cellElement.dataset.row = rowIndex;
                     cellElement.dataset.col = colIndex;
                     rowElement.appendChild(cellElement);
                 });
 
-                document.querySelector('.island').appendChild(rowElement);
+                islandElement.appendChild(rowElement);
             });
         })
         .catch(error => console.error('Error fetching island data:', error));
@@ -41,11 +43,10 @@ function updateIsland() {
 
 function addPredator() {
     const predatorType = predatorTypeSelect.value;
+    console.log('Adding predator:', predatorType);
     fetch(`/api/animals/predator?predatorType=${predatorType}`, { method: 'POST' })
         .then(response => {
-            if (response.ok) {
-                updateIsland();
-            } else {
+            if (!response.ok) {
                 console.error('Failed to add predator');
             }
         })
@@ -54,56 +55,77 @@ function addPredator() {
 
 function addHerbivore() {
     const herbivoreType = herbivoreTypeSelect.value;
+    console.log('Adding herbivore:', herbivoreType);
     fetch(`/api/animals/herbivore?herbivoreType=${herbivoreType}`, { method: 'POST' })
         .then(response => {
-            if (response.ok) {
-                updateIsland();
-            } else {
+            if (!response.ok) {
                 console.error('Failed to add herbivore');
             }
         })
         .catch(error => console.error('Error adding herbivore:', error));
 }
 
-function addRandomAnimal() {
-    const isPredator = Math.random() < 0.5;
+function addOmnivore() {
+    const omnivoreType = omnivoreTypeSelect.value;
+    console.log('Adding Omnivore:', omnivoreType);
+    fetch(`/api/animals/omnivore?omnivoreType=${omnivoreType}`, { method: 'POST' })
+        .then(response => {
+            if (!response.ok) {
+                console.error('Failed to add omnivore');
+            }
+        })
+        .catch(error => console.error('Error adding omnivore:', error));
+}
 
-    if (isPredator) {
-        const randomPredator = predatorTypes[Math.floor(Math.random() * predatorTypes.length)];
-        console.log('Adding predator:', randomPredator); // Выводим тип хищника в консоль
-        fetch(`/api/animals/predator?predatorType=${randomPredator}`, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    updateIsland();
-                } else {
-                    console.error('Failed to add predator');
-                }
-            })
-            .catch(error => console.error('Error adding predator:', error));
-    } else {
-        const randomHerbivore = herbivoreTypes[Math.floor(Math.random() * herbivoreTypes.length)];
-        console.log('Adding herbivore:', randomHerbivore); // Выводим тип травоядного в консоль
-        fetch(`/api/animals/herbivore?herbivoreType=${randomHerbivore}`, { method: 'POST' })
-            .then(response => {
-                if (response.ok) {
-                    updateIsland();
-                } else {
-                    console.error('Failed to add herbivore');
-                }
-            })
-            .catch(error => console.error('Error adding herbivore:', error));
+async function addRandomAnimal() {
+    for (let i = 0; i < 5; i++) {
+        const random = Math.random();
+
+        if (random < 0.33) {
+            const randomPredator = predatorTypes[Math.floor(Math.random() * predatorTypes.length)];
+            console.log('Adding predator:', randomPredator);
+            await fetch(`/api/animals/predator?predatorType=${randomPredator}`, { method: 'POST' })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Failed to add predator');
+                    }
+                })
+                .catch(error => console.error('Error adding predator:', error));
+        } else if (random >= 0.33 && random < 0.66) {
+            const randomHerbivore = herbivoreTypes[Math.floor(Math.random() * herbivoreTypes.length)];
+            console.log('Adding herbivore:', randomHerbivore);
+            await fetch(`/api/animals/herbivore?herbivoreType=${randomHerbivore}`, { method: 'POST' })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Failed to add herbivore');
+                    }
+                })
+                .catch(error => console.error('Error adding herbivore:', error));
+        } else {
+            const randomOmnivore = omnivoreTypes[Math.floor(Math.random() * omnivoreTypes.length)];
+            console.log('Adding Omnivore:', randomOmnivore);
+            await fetch(`/api/animals/omnivore?omnivoreType=${randomOmnivore}`, { method: 'POST' })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Failed to add omnivore');
+                    }
+                })
+                .catch(error => console.error('Error adding omnivore:', error));
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 500)); // добавляем задержку
     }
+
     updateIsland();
-    location.reload();
 }
 
 function showCellDetails(x, y) {
     fetch(`/api/island/cell?x=${x}&y=${y}`)
         .then(response => response.json())
         .then(data => {
-            let modalContentText = document.getElementById('modal-content-text');
+            const modalContentText = document.getElementById('modal-content-text');
             if (modalContentText) {
-                modalContentText.innerText = `${data.join(', ')}`;
+                modalContentText.innerText = data.join(', ');
                 document.getElementById('modal').style.display = 'block';
                 isModalOpen = true;
             } else {
@@ -118,30 +140,57 @@ function closeModal() {
     isModalOpen = false;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    let selectedPredatorType = localStorage.getItem('selectedPredatorType');
-    let selectedHerbivoreType = localStorage.getItem('selectedHerbivoreType');
-
+document.addEventListener('DOMContentLoaded', async function () {
     predatorTypeSelect = document.getElementById('predatorType');
     herbivoreTypeSelect = document.getElementById('herbivoreType');
+    omnivoreTypeSelect = document.getElementById('omnivoreType');
 
-    if (selectedPredatorType) {
-        predatorTypeSelect.value = selectedPredatorType;
+    try {
+        const [predatorData, herbivoreData, omnivoreData] = await fetchConfigAndData();
+
+        predatorTypes = predatorData;
+        console.log('Predator types:', predatorTypes);
+        predatorTypes.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type;
+            predatorTypeSelect.appendChild(option);
+        });
+
+        herbivoreTypes = herbivoreData;
+        console.log('Herbivore types:', herbivoreTypes);
+        herbivoreTypes.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type;
+            herbivoreTypeSelect.appendChild(option);
+        });
+
+        omnivoreTypes = omnivoreData;
+        console.log('Omnivore types:', omnivoreTypes);
+        omnivoreTypes.forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type;
+            omnivoreTypeSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error fetching initial data:', error);
     }
-    predatorTypeSelect.addEventListener('change', function() {
-        selectedPredatorType = this.value;
-        localStorage.setItem('selectedPredatorType', selectedPredatorType);
+
+    predatorTypeSelect.addEventListener('change', function () {
+        localStorage.setItem('selectedPredatorType', this.value);
     });
 
-    if (selectedHerbivoreType) {
-        herbivoreTypeSelect.value = selectedHerbivoreType;
-    }
-    herbivoreTypeSelect.addEventListener('change', function() {
-        selectedHerbivoreType = this.value;
-        localStorage.setItem('selectedHerbivoreType', selectedHerbivoreType);
+    herbivoreTypeSelect.addEventListener('change', function () {
+        localStorage.setItem('selectedHerbivoreType', this.value);
     });
 
-    document.addEventListener('click', function(event) {
+    omnivoreTypeSelect.addEventListener('change', function () {
+        localStorage.setItem('selectedOmnivoreType', this.value);
+    });
+
+    document.addEventListener('click', function (event) {
         if (event.target.classList.contains('cell')) {
             const x = event.target.dataset.row;
             const y = event.target.dataset.col;
@@ -149,48 +198,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    fetchConfigAndData()
-        .then(([config, predatorData, herbivoreData]) => {
-            // Обработка конфигурации
-            if (config.interval) {
-                updateInterval = config.interval;
-                console.log(updateInterval);
-
-                setInterval(function() {
-                    if (!isModalOpen) {
-                        location.reload();
-                    }
-                }, updateInterval);
-                updateIsland();
-                console.log(updateIsland);
-            }
-
-            // Обработка данных хищников
-            predatorTypes = predatorData;
-            console.log('Predator types:', predatorTypes); // Выводим типы хищников в консоль
-            predatorTypes.forEach(type => {
-                let option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                predatorTypeSelect.appendChild(option);
-            });
-
-            // Обработка данных травоядных
-            herbivoreTypes = herbivoreData;
-            console.log('Herbivore types:', herbivoreTypes); // Выводим типы травоядных в консоль
-            herbivoreTypes.forEach(type => {
-                let option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                herbivoreTypeSelect.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error fetching initial data:', error));
-
-    // Добавляем кнопку для добавления случайного животного
     const addRandomAnimalButton = document.createElement('button');
     addRandomAnimalButton.textContent = 'Add Random Animal';
     addRandomAnimalButton.addEventListener('click', addRandomAnimal);
     document.body.appendChild(addRandomAnimalButton);
-    setInterval(location.reload, updateInterval)
+
+    setInterval(function () {
+        if (!isModalOpen) {
+            location.reload(); // перезагружаем страницу через определенный интервал времени
+        }
+    }, updateInterval);
 });

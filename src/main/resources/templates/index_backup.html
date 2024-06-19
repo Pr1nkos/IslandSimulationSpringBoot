@@ -22,13 +22,6 @@
     <button id="addHerbivoreButton" type="button" onclick="addHerbivore()">Add Herbivore</button>
 </form>
 
-<form id="addOmnivoreForm">
-    <label for="omnivoreType">Add Omnivore:</label>
-    <select id="omnivoreType" name="omnivoreType">
-    </select>
-    <button id="addOmnivoreButton" type="button" onclick="addOmnivore()">Add Omnivore</button>
-</form>
-
 <div class="island">
     <div th:each="row, rowStat : ${island}">
         <div th:each="cell, cellStat : ${row}" class="cell" th:text="${cell}"
