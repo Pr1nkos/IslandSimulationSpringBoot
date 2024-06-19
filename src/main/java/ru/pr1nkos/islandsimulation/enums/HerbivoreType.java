@@ -21,5 +21,4 @@ public enum HerbivoreType implements AnimalType {
     HerbivoreType(String type) {
         this.type = type;
     }
-
 }

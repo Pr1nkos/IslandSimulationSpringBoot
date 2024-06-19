@@ -20,7 +20,7 @@ public class PlantManagementService {
     private final IslandData islandData;
 
     public void addPlant() {
-        Plant plant = new Plant(); // Создаем новое растение
+        Plant plant = new Plant();
         plants.add(plant);
         placePlantOnIsland(plant);
     }
@@ -42,7 +42,7 @@ public class PlantManagementService {
     private boolean canPlacePlant(int x, int y, Map<String, Cell> islandCells) {
         String key = x + "," + y;
         Cell cell = islandCells.getOrDefault(key, new Cell());
-        return cell.getPlants().isEmpty();  // Простейшее условие, можно доработать по необходимости
+        return cell.getPlants().size() < 200;
     }
 
     public List<Plant> getPlantsAt(int x, int y) {

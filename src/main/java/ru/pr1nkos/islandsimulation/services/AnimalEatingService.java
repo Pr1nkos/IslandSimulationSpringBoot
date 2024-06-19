@@ -37,12 +37,14 @@ public class AnimalEatingService {
 
 
     public void attemptToEat(Animal predator) {
-        Animal prey = findPreyForPredator(predator);
+        while (predator.getFoodNeed() > 0) {
+            Animal prey = findPreyForPredator(predator);
 
-        if (prey != null && prey.isAlive()) {
+            if (prey == null || !prey.isAlive()) {
+                break;
+            }
+
             double chanceToEat = getChanceToEat(predator, prey);
-            System.out.println(predator.getClass().getSimpleName().toLowerCase() +
-                    prey.getClass().getSimpleName().toLowerCase() + " " + chanceToEat / 100);
 
             double randomValue = random.nextDouble();
 
@@ -50,14 +52,22 @@ public class AnimalEatingService {
                 System.out.println("Random value: " + randomValue);
                 System.out.println("Chance to eat: " + chanceToEat / 100);
                 eat(predator, prey);
-            }
-            else if (randomValue > (chanceToEat / 100) && chanceToEat != 0.0) {
+                predator.setWeight(predator.getWeight() + prey.getWeight());
+                predator.setFoodNeed(predator.getFoodNeed() - prey.getWeight());
+                System.out.println("Predator's remaining food needed: " + predator.getFoodNeed());
+            } else if (randomValue > (chanceToEat / 100) && chanceToEat != 0.0) {
                 System.out.println("Random value: " + randomValue);
                 System.out.println("Chance to eat: " + chanceToEat / 100);
                 System.out.println("Добыча сбежала");
             }
+
+            if (predator.getFoodNeed() <= 0) {
+                System.out.println("Predator is full.");
+                break;
+            }
         }
     }
+
 
     private Integer getChanceToEat(Animal predator, Animal prey) {
         return predator.getEatingChances().getOrDefault(prey.getClass().getSimpleName().toLowerCase(), 0);
@@ -66,7 +76,12 @@ public class AnimalEatingService {
     private Animal findPreyForPredator(Animal predator) {
         List<Animal> possiblePreys = animalManagementService.getAnimalsAt(predator.getX(), predator.getY());
         possiblePreys.remove(predator);
-        return possiblePreys.isEmpty() ? null : possiblePreys.get(random.nextInt(possiblePreys.size()));
+
+        if (possiblePreys.isEmpty()) {
+            return null;
+        }
+
+        return possiblePreys.get(random.nextInt(possiblePreys.size()));
     }
 
     private void eat(Animal predator, Animal prey) {

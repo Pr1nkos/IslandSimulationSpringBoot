@@ -3,6 +3,7 @@ package ru.pr1nkos.islandsimulation.pojo;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.config.IslandConfig;
 
@@ -15,7 +16,8 @@ import java.util.Map;
 public class IslandData {
 
     private final IslandConfig islandConfig;
-    private Map<String, Cell> islandCells; // Используем одну карту для ячеек острова
+    private final ApplicationEventPublisher eventPublisher;
+    private Map<String, Cell> islandCells;
 
     @PostConstruct
     private void initializeIsland() {
@@ -29,9 +31,6 @@ public class IslandData {
                 islandCells.put(key, new Cell());
             }
         }
-        for (String key : islandCells.keySet()) {
-            System.out.println(key);
-        }
-    }
 
+    }
 }

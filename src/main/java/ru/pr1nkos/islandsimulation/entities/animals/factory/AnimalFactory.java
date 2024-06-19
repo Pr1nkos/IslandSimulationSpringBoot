@@ -3,6 +3,7 @@ package ru.pr1nkos.islandsimulation.entities.animals.factory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
+import ru.pr1nkos.islandsimulation.entities.animals.interfaces.AnimalType;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
 import ru.pr1nkos.islandsimulation.enums.OmnivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
@@ -23,5 +24,14 @@ public class AnimalFactory {
 
     public Animal createAnimal(OmnivoreType omnivoreType) {
         return animalFlyweightFactory.getAnimal(omnivoreType);
+    }
+
+    public Animal createRandomAnimal(AnimalType animalType) {
+        return switch (animalType) {
+            case PredatorType predatorType -> createAnimal(predatorType);
+            case HerbivoreType herbivoreType -> createAnimal(herbivoreType);
+            case OmnivoreType omnivoreType -> createAnimal(omnivoreType);
+            case null, default -> throw new IllegalArgumentException("Unknown animal type: " + animalType);
+        };
     }
 }

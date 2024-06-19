@@ -31,7 +31,6 @@ public class PlantEatingService {
 
         for (Cell cell : islandCells.values()) {
             for (Animal animal : cell.getAnimals()) {
-                // Проверяем, что животное является травоядным или всеядным
                 if (isHerbivore(animal) || isOmnivore(animal)) {
                     animalsToFeed.add(animal);
                 }
@@ -42,11 +41,16 @@ public class PlantEatingService {
     }
 
     public void attemptToEatPlant(Animal herbivore) {
-        Plant plant = findPlantForHerbivore(herbivore);
+        while (herbivore.getFoodNeed() > 0) {
+            Plant plant = findPlantForHerbivore(herbivore);
 
-        if (plant != null && plant.isAlive()) {
+            if (plant == null || !plant.isAlive()) {
+                break;
+            }
+
             double chanceToEat = getChanceToEatPlant(herbivore);
-            System.out.println(herbivore.getClass().getSimpleName().toLowerCase() + " пытается съесть растение с шансом " + chanceToEat / 100);
+            System.out.println(herbivore.getClass().getSimpleName().toLowerCase() +
+                    " пытается съесть растение с шансом " + chanceToEat / 100);
 
             double randomValue = random.nextDouble();
 
@@ -54,10 +58,19 @@ public class PlantEatingService {
                 System.out.println("Random value: " + randomValue);
                 System.out.println("Chance to eat: " + chanceToEat / 100);
                 eatPlant(herbivore, plant);
+
+                herbivore.setFoodNeed(herbivore.getFoodNeed() - 1);
+                herbivore.setWeight(herbivore.getWeight() + 1);
+                System.out.println("Оставшаяся потребность в пище травоядного: " + herbivore.getFoodNeed());
             } else {
                 System.out.println("Random value: " + randomValue);
                 System.out.println("Chance to eat: " + chanceToEat / 100);
                 System.out.println("Не удалось съесть растение");
+            }
+
+            if (herbivore.getFoodNeed() <= 0) {
+                System.out.println("Травоядное сыто.");
+                break;
             }
         }
     }

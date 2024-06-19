@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import ru.pr1nkos.islandsimulation.entities.animals.interfaces.AnimalType;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
 import ru.pr1nkos.islandsimulation.entities.plants.Plant;
 import ru.pr1nkos.islandsimulation.pojo.Cell;
 
-import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Random;
 
@@ -20,10 +20,10 @@ import java.util.Random;
 @EqualsAndHashCode(callSuper = false)
 public abstract class Animal implements EatingBehavior, MovingBehavior, ReproducingBehavior {
 
-    protected BigDecimal weight;
+    protected double weight;
     private int baseMaxCountPerLocation;
     protected int maxSpeed;
-    protected BigDecimal foodNeed;
+    protected double foodNeed;
     protected EatingBehavior eatingBehavior;
     protected MovingBehavior movingBehavior;
     protected ReproducingBehavior reproducingBehavior;
@@ -53,10 +53,10 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
                             int baseMaxCountPerLocation,
                             int baseMaxSpeed,
                             double baseFoodNeeded) {
-        this.weight = BigDecimal.valueOf(baseWeight + (random.nextDouble() * 10 - 5));
+        this.weight = baseWeight + (random.nextDouble() * 10 - 5);
         this.baseMaxCountPerLocation = baseMaxCountPerLocation;
         this.maxSpeed = Math.max(0, baseMaxSpeed > 0 ? baseMaxSpeed - random.nextInt(baseMaxSpeed) : 0);
-        this.foodNeed = BigDecimal.valueOf(baseFoodNeeded + (random.nextDouble() * 2 - 1));
+        this.foodNeed = baseFoodNeeded + (random.nextDouble() * 2 - 1);
         this.isAlive = true;
     }
 
@@ -96,4 +96,6 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
             System.out.println("Мертвое животное не может размножаться.");
         }
     }
+
+    public abstract AnimalType getAnimalType();
 }

@@ -20,7 +20,7 @@ function updateIsland() {
         .then(response => response.json())
         .then(data => {
             const islandElement = document.querySelector('.island');
-            islandElement.innerHTML = ''; // очищаем содержимое острова перед обновлением
+            islandElement.innerHTML = '';
 
             data.forEach((row, rowIndex) => {
                 const rowElement = document.createElement('div');
@@ -78,45 +78,49 @@ function addOmnivore() {
 }
 
 async function addRandomAnimal() {
-    for (let i = 0; i < 5; i++) {
-        const random = Math.random();
+    const random = Math.random();
 
-        if (random < 0.33) {
-            const randomPredator = predatorTypes[Math.floor(Math.random() * predatorTypes.length)];
-            console.log('Adding predator:', randomPredator);
-            await fetch(`/api/animals/predator?predatorType=${randomPredator}`, { method: 'POST' })
-                .then(response => {
-                    if (!response.ok) {
-                        console.error('Failed to add predator');
-                    }
-                })
-                .catch(error => console.error('Error adding predator:', error));
-        } else if (random >= 0.33 && random < 0.66) {
-            const randomHerbivore = herbivoreTypes[Math.floor(Math.random() * herbivoreTypes.length)];
-            console.log('Adding herbivore:', randomHerbivore);
-            await fetch(`/api/animals/herbivore?herbivoreType=${randomHerbivore}`, { method: 'POST' })
-                .then(response => {
-                    if (!response.ok) {
-                        console.error('Failed to add herbivore');
-                    }
-                })
-                .catch(error => console.error('Error adding herbivore:', error));
-        } else {
-            const randomOmnivore = omnivoreTypes[Math.floor(Math.random() * omnivoreTypes.length)];
-            console.log('Adding Omnivore:', randomOmnivore);
-            await fetch(`/api/animals/omnivore?omnivoreType=${randomOmnivore}`, { method: 'POST' })
-                .then(response => {
-                    if (!response.ok) {
-                        console.error('Failed to add omnivore');
-                    }
-                })
-                .catch(error => console.error('Error adding omnivore:', error));
-        }
-
-        await new Promise(resolve => setTimeout(resolve, 500)); // добавляем задержку
+    if (random < 0.33) {
+        const randomPredator = predatorTypes[Math.floor(Math.random() * predatorTypes.length)];
+        console.log('Adding predator:', randomPredator);
+        await fetch(`/api/animals/predator?predatorType=${randomPredator}`, { method: 'POST' })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to add predator');
+                }
+            })
+            .catch(error => console.error('Error adding predator:', error));
+    } else if (random >= 0.33 && random < 0.66) {
+        const randomHerbivore = herbivoreTypes[Math.floor(Math.random() * herbivoreTypes.length)];
+        console.log('Adding herbivore:', randomHerbivore);
+        await fetch(`/api/animals/herbivore?herbivoreType=${randomHerbivore}`, { method: 'POST' })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to add herbivore');
+                }
+            })
+            .catch(error => console.error('Error adding herbivore:', error));
+    } else {
+        const randomOmnivore = omnivoreTypes[Math.floor(Math.random() * omnivoreTypes.length)];
+        console.log('Adding Omnivore:', randomOmnivore);
+        await fetch(`/api/animals/omnivore?omnivoreType=${randomOmnivore}`, { method: 'POST' })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Failed to add omnivore');
+                }
+            })
+            .catch(error => console.error('Error adding omnivore:', error));
     }
 
+    await new Promise(resolve => setTimeout(resolve, 500)); // добавляем задержку
+}
+
+async function addRandomAnimalsMultipleTimes(times) {
+    for (let i = 0; i < times; i++) {
+        await addRandomAnimal();
+    }
     updateIsland();
+    localStorage.setItem('addRandomAnimalWhenPageLoad', 'true');
 }
 
 function showCellDetails(x, y) {
@@ -174,6 +178,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             option.textContent = type;
             omnivoreTypeSelect.appendChild(option);
         });
+
+        // Проверяем флаг в localStorage
+        const addRandomAnimalWhenPageLoad = localStorage.getItem('addRandomAnimalWhenPageLoad') === 'false';
+        console.log(addRandomAnimalWhenPageLoad);
+        if (addRandomAnimalWhenPageLoad) {
+            await addRandomAnimalsMultipleTimes(5);
+        }
+
     } catch (error) {
         console.error('Error fetching initial data:', error);
     }
@@ -205,7 +217,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     setInterval(function () {
         if (!isModalOpen) {
-            location.reload(); // перезагружаем страницу через определенный интервал времени
+            location.reload();
         }
     }, updateInterval);
 });

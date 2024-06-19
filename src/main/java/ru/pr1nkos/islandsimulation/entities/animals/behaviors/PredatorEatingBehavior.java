@@ -12,7 +12,6 @@ public class PredatorEatingBehavior implements EatingBehavior {
     public void eat(Animal predator, Animal prey) {
         if (prey.isAlive()) {
             prey.setAlive(false);
-            predator.setWeight(predator.getWeight().add(prey.getWeight()));
             System.out.println(predator.getClass().getSimpleName() + " съел " + prey.getClass().getSimpleName());
         } else {
             System.out.println(prey.getClass().getSimpleName() + " уже мертв.");

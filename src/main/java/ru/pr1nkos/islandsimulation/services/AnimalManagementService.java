@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.factory.AnimalFactory;
+import ru.pr1nkos.islandsimulation.entities.animals.interfaces.AnimalType;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
 import ru.pr1nkos.islandsimulation.enums.OmnivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
@@ -39,13 +40,46 @@ public class AnimalManagementService {
         placeAnimalOnIsland(animal);
     }
 
+    public Animal createAnimal(AnimalType animalType) {
+        return switch (animalType) {
+            case PredatorType predatorType -> animalFactory.createAnimal(predatorType);
+            case HerbivoreType herbivoreType -> animalFactory.createAnimal(herbivoreType);
+            case OmnivoreType omnivoreType -> animalFactory.createAnimal(omnivoreType);
+            case null, default -> throw new IllegalArgumentException("Unknown animal type: " + animalType);
+        };
+    }
+    public void addRandomAnimal(Cell cell) {
+        AnimalType[] animalTypes = {
+                PredatorType.WOLF,
+                PredatorType.BOA,
+                PredatorType.EAGLE,
+                PredatorType.FOX,
+                PredatorType.BEAR,
+                HerbivoreType.HORSE,
+                HerbivoreType.DEER,
+                HerbivoreType.MOUSE,
+                HerbivoreType.SHEEP,
+                HerbivoreType.BUFFALO,
+                HerbivoreType.CATERPILLAR,
+                OmnivoreType.RABBIT,
+                OmnivoreType.GOAT,
+                OmnivoreType.BOAR,
+                OmnivoreType.DUCK
+        };
+
+        AnimalType randomType = animalTypes[random.nextInt(animalTypes.length)];
+
+        Animal animal = animalFactory.createRandomAnimal(randomType);
+        cell.addAnimal(animal);
+    }
+
     private void placeAnimalOnIsland(Animal animal) {
         Map<String, Cell> islandCells = islandData.getIslandCells();
         int x, y;
         do {
             x = random.nextInt(islandData.getIslandConfig().getWidth());
             y = random.nextInt(islandData.getIslandConfig().getHeight());
-        } while (!canPlaceAnimal(x, y, islandCells));
+        } while (!canPlaceAnimal(x, y, islandCells, animal));
 
         animal.setX(x);
         animal.setY(y);
@@ -53,10 +87,10 @@ public class AnimalManagementService {
         islandCells.computeIfAbsent(key, k -> new Cell()).addAnimal(animal);
     }
 
-    private boolean canPlaceAnimal(int x, int y, Map<String, Cell> islandCells) {
+    private boolean canPlaceAnimal(int x, int y, Map<String, Cell> islandCells, Animal animal) {
         String key = x + "," + y;
         Cell cell = islandCells.getOrDefault(key, new Cell());
-        return cell.getAnimals().size() < 10;
+        return cell.getAnimals().size() < animal.getBaseMaxCountPerLocation();
     }
 
     public List<Animal> getAnimalsAt(int x, int y) {

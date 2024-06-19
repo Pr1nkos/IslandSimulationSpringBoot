@@ -3,13 +3,11 @@ package ru.pr1nkos.islandsimulation.config;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.pr1nkos.islandsimulation.jobs.AnimalEatingJob;
-import ru.pr1nkos.islandsimulation.jobs.AnimalMovementJob;
-import ru.pr1nkos.islandsimulation.jobs.PlantAppearJob;
-import ru.pr1nkos.islandsimulation.jobs.PlantEatingJob;
+import ru.pr1nkos.islandsimulation.jobs.*;
 
 @Configuration
 public class QuartzConfig {
+
 
     @Bean
     public JobDetail animalMovementJobDetail() {
@@ -64,7 +62,7 @@ public class QuartzConfig {
     @Bean
     public Trigger plantAppearJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(5)
+                .withIntervalInSeconds(1)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -85,7 +83,7 @@ public class QuartzConfig {
     @Bean
     public Trigger plantEatingJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(10) // Пример: раз в 15 секунд
+                .withIntervalInSeconds(10)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -94,5 +92,26 @@ public class QuartzConfig {
                 .withSchedule(scheduleBuilder)
                 .build();
     }
-}
 
+    @Bean
+    public JobDetail animalBreedingJobDetail() {
+        return JobBuilder.newJob(AnimalBreedingJob.class)
+                .withIdentity("animalBreedingJob")
+                .storeDurably()
+                .build();
+    }
+
+    @Bean
+    public Trigger animalBreedingJobTrigger() {
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
+                .withIntervalInSeconds(15)
+                .repeatForever();
+
+        return TriggerBuilder.newTrigger()
+                .forJob(animalBreedingJobDetail())
+                .withIdentity("animalBreedingTrigger")
+                .withSchedule(scheduleBuilder)
+                .build();
+    }
+
+}
