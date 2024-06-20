@@ -10,7 +10,7 @@ public class PlantEatingBehavior implements EatingBehavior {
 
     @Override
     public void eat(Animal predator, Animal prey) {
-        // Для этой реализации не нужен метод eat(Animal predator, Animal prey)
+
         System.out.println("Этот метод не используется для PlantEatingBehavior");
     }
 

@@ -17,7 +17,6 @@ public class AnimalEatingJob implements Job {
     private final AnimalMovementService animalMovementService;
     private final AnimalEatingService animalEatingService;
 
-    @SneakyThrows
     @Override
     public void execute(JobExecutionContext context) {
 

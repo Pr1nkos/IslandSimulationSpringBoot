@@ -1,5 +1,6 @@
 package ru.pr1nkos.islandsimulation.services;
 
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class RandomManager {
     }
 
     public <T> T getRandomElement(List<T> list) {
-        if (list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             return null;
         }
         return list.get(random.nextInt(list.size()));

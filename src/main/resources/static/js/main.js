@@ -39,11 +39,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             omnivoreTypeSelect.appendChild(option);
         });
 
-        const addRandomAnimalWhenPageLoad = localStorage.getItem('addRandomAnimalWhenPageLoad') === 'true';
-        if (addRandomAnimalWhenPageLoad) {
-            for (let i = 0; i < 5; i++) {
-                await animalService.addRandomAnimal();
-            }
+        // Добавление случайных животных при загрузке страницы
+        for (let i = 0; i < 5; i++) {
+            await animalService.addRandomAnimal();
         }
         await island.update();
 
@@ -97,7 +95,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }, 5000);
 });
-
 
 window.closeModal = () => {
     const modal = new Modal('#modal', '#modal-content-text');

@@ -1,5 +1,4 @@
 package ru.pr1nkos.islandsimulation.services;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
@@ -7,6 +6,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.behaviors.PredatorEatingBeha
 import ru.pr1nkos.islandsimulation.pojo.Cell;
 import ru.pr1nkos.islandsimulation.pojo.IslandData;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -21,15 +21,15 @@ public class AnimalEatingService {
     private final IslandData islandData;
     private final List<Animal> animalsToFeed = new CopyOnWriteArrayList<>();
 
-    public List<Animal> getAnimalsToFeed() {
-        animalsToFeed.clear();
+    public synchronized List<Animal> getAnimalsToFeed() {
+        List<Animal> animals = new ArrayList<>();
         Map<String, Cell> islandCells = islandData.getIslandCells();
 
         for (Cell cell : islandCells.values()) {
-            animalsToFeed.addAll(cell.getAnimals());
+            animals.addAll(cell.getAnimals());
         }
 
-        return animalsToFeed;
+        return animals;
     }
 
     public void attemptToEat(Animal predator) {
@@ -67,9 +67,13 @@ public class AnimalEatingService {
         return predator.getEatingChances().getOrDefault(prey.getClass().getSimpleName().toLowerCase(), 0);
     }
 
-    private Animal findPreyForPredator(Animal predator) {
-        List<Animal> possiblePreys = animalManagementService.getAnimalsAt(predator.getX(), predator.getY());
+    private synchronized Animal findPreyForPredator(Animal predator) {
+        List<Animal> possiblePreys = new ArrayList<>(animalManagementService.getAnimalsAt(predator.getX(), predator.getY()));
         possiblePreys.remove(predator);
+
+        if (possiblePreys.isEmpty()) {
+            return null;
+        }
 
         return randomManager.getRandomElement(possiblePreys);
     }

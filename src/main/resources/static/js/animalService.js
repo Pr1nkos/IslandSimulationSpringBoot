@@ -43,6 +43,7 @@ export class AnimalService {
             const type = this.getRandomType(this.omnivoreTypes);
             await this.addOmnivore(type);
         }
+        location.reload();
     }
 
     getRandomType(types) {

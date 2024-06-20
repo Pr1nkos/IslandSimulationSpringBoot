@@ -1,34 +1,20 @@
-/*.island {*/
-/*    display: grid;*/
-/*    grid-template-columns: repeat(100, 20px);*/
-/*    grid-template-rows: repeat(20, 20px);*/
-/*    gap: 1px;*/
-/*}*/
-
-.island {
-    display: grid;
-    grid-template-columns: repeat(100, 20px);
-    grid-template-rows: repeat(20, 20px);
-    gap: 1px;
-    /*justify-content: center;*/
-    margin: 20px auto;
-    background-color: #e0e0e0;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
     margin: 0;
     padding: 0;
-    justify-content: center;
+    display: flex;
+    justify-content: center; /* центрирование по горизонтали */
+    align-items: center; /* центрирование по вертикали */
+    height: 100vh; /* высота окна просмотра */
+}
+
+.container {
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
     margin-top: 20px;
     color: #5a5a5a;
 }
@@ -64,7 +50,17 @@ button:hover {
     background-color: #0056b3;
 }
 
-
+.island {
+    display: grid;
+    grid-template-columns: repeat(100, 20px);
+    grid-template-rows: repeat(20, 20px);
+    gap: 1px;
+    margin: 20px auto;
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 
 .cell {
     width: 20px;
@@ -129,4 +125,42 @@ button:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+#addRandomAnimalButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+#addRandomAnimalButton:hover {
+    background-color: #0056b3;
+}
+/* Center the Add Random Animal button */
+.add-random-animal-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.add-random-animal-button button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-random-animal-button button:hover {
+    background-color: #0056b3;
 }
