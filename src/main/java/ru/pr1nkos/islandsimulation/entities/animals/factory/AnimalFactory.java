@@ -26,12 +26,4 @@ public class AnimalFactory {
         return animalFlyweightFactory.getAnimal(omnivoreType);
     }
 
-    public Animal createRandomAnimal(AnimalType animalType) {
-        return switch (animalType) {
-            case PredatorType predatorType -> createAnimal(predatorType);
-            case HerbivoreType herbivoreType -> createAnimal(herbivoreType);
-            case OmnivoreType omnivoreType -> createAnimal(omnivoreType);
-            case null, default -> throw new IllegalArgumentException("Unknown animal type: " + animalType);
-        };
-    }
 }

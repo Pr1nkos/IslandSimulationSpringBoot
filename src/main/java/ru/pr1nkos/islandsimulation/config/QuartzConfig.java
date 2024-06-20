@@ -62,7 +62,7 @@ public class QuartzConfig {
     @Bean
     public Trigger plantAppearJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(1)
+                .withIntervalInSeconds(10)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()

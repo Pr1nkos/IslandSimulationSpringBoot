@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Island Simulation</title>
     <link rel="stylesheet" href="../../css/styles.css">
-    <script src="../../js/scripts.js"></script>
+    <script type="module" src="../../js/main.js"></script>
 </head>
 <body>
 <h1>Island Simulation</h1>
@@ -12,22 +12,24 @@
     <label for="predatorType">Add Predator:</label>
     <select id="predatorType" name="predatorType">
     </select>
-    <button id="addPredatorButton" type="button" onclick="addPredator()">Add Predator</button>
+    <button id="addPredatorButton" type="button">Add Predator</button>
 </form>
 
 <form id="addHerbivoreForm">
     <label for="herbivoreType">Add Herbivore:</label>
     <select id="herbivoreType" name="herbivoreType">
     </select>
-    <button id="addHerbivoreButton" type="button" onclick="addHerbivore()">Add Herbivore</button>
+    <button id="addHerbivoreButton" type="button">Add Herbivore</button>
 </form>
 
 <form id="addOmnivoreForm">
     <label for="omnivoreType">Add Omnivore:</label>
     <select id="omnivoreType" name="omnivoreType">
     </select>
-    <button id="addOmnivoreButton" type="button" onclick="addOmnivore()">Add Omnivore</button>
+    <button id="addOmnivoreButton" type="button">Add Omnivore</button>
 </form>
+
+<button id="addRandomAnimalButton">Add Random Animal</button>
 
 <div class="island">
     <div th:each="row, rowStat : ${island}">
