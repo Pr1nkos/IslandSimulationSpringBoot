@@ -1,25 +1,24 @@
-
----
-
-# Island Simulation Application
+# Island Simulation Application 🌴🐾
 
 This project is a comprehensive island simulation application developed using Spring Boot. It simulates an ecosystem where animals and plants interact based on predefined behaviors and environmental factors.
 
 ## Table of Contents
 
-- [Technologies Used](#technologies-used)
-- [Services](#services)
-- [Behavioral Strategies](#behavioral-strategies)
-- [Scheduled Jobs](#scheduled-jobs)
-- [Frontend Components](#frontend-components)
-- [YAML Configuration](#yaml-configuration)
-- [Animal Types](#animal-types)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+- [Technologies Used](#technologies-used) 🛠️
+- [Services](#services) 🚀
+- [Behavioral Strategies](#behavioral-strategies) 🐋
+- [Scheduled Jobs](#scheduled-jobs) 🕒
+- [Frontend Components](#frontend-components) 🖥️
+- [YAML Configuration](#yaml-configuration) 📝
+- [Animal Types](#animal-types) 🐻
+- [Features](#features) ✨
+- [Getting Started](#getting-started) 🚀
+- [Contributing](#contributing) 🤝
+- [License](#license) 📜
 
-## Technologies Used
+---
+
+## Technologies Used 🛠️
 
 - **Spring Boot**: Framework for creating standalone, production-grade Spring-based applications.
 - **Factory Pattern**: Used to instantiate various types of animals and plants based on input parameters.
@@ -34,7 +33,9 @@ This project is a comprehensive island simulation application developed using Sp
 - **Enums**: Used to represent types (e.g., HerbivoreType, PlantType) and categories in a type-safe manner.
 - **Quartz Scheduler**: Integrated for scheduling tasks (e.g., simulation updates, feeding cycles).
 
-## Services
+---
+
+## Services 🚀
 
 - **AnimalBreedingService**: Manages animal reproduction cycles based on predefined rules and environmental conditions.
 - **AnimalCharacteristicsService**: Provides methods to retrieve and manage characteristics (e.g., weight, age) of animals.
@@ -47,7 +48,9 @@ This project is a comprehensive island simulation application developed using Sp
 - **PlantManagementService**: Controls growth, propagation, and removal of plants within the simulation environment.
 - **RandomManager**: Utility service for generating random numbers and selecting random elements from collections.
 
-## Behavioral Strategies
+---
+
+## Behavioral Strategies 🐋
 
 - **DefaultMovingBehavior**: Defines default movement strategy for animals, guiding navigation across the island terrain.
 - **DefaultReproducingBehavior**: Specifies default behavior for animal reproduction, including mate selection and offspring production.
@@ -55,7 +58,9 @@ This project is a comprehensive island simulation application developed using Sp
 - **PlantEatingBehavior**: Defines interaction and consumption of plants by herbivorous and omnivorous animals within the simulation.
 - **PredatorEatingBehavior**: Manages predatory instincts of animals when hunting and consuming other animals.
 
-## Scheduled Jobs
+---
+
+## Scheduled Jobs 🕒
 
 - **AnimalBreedingJob**: Scheduled task managing animal breeding and reproduction cycles based on predefined rules.
 - **AnimalEatingJob**: Scheduled task handling feeding behaviors of animals to ensure they consume necessary food.
@@ -64,7 +69,9 @@ This project is a comprehensive island simulation application developed using Sp
 - **PlantEatingJob**: Scheduled task managing consumption of plants by herbivorous and omnivorous animals.
 - **PopulateIslandJob**: Scheduled job initializing and populating the island environment with initial animals and plants.
 
-## Frontend Components
+---
+
+## Frontend Components 🖥️
 
 ### `styles.css`
 CSS stylesheet defining visual appearance and layout of the frontend interface.
@@ -81,7 +88,9 @@ CSS stylesheet defining visual appearance and layout of the frontend interface.
 
 - **`index.html`**: HTML template file serving as main entry point for the frontend application, including references to CSS stylesheets and JavaScript files.
 
-## YAML Configuration
+---
+
+## YAML Configuration 📝
 
 ### `animalCharacteristics.yml`
 
@@ -91,20 +100,26 @@ File containing configurable characteristics of animals within the simulation. A
 
 Main configuration file for the Spring Boot application, used to set general application settings, database configurations, and other environment-specific parameters.
 
-## Animal Types
+---
+
+## Animal Types 🐻
 
 - **Predators**: Bear, Boa, Eagle, Fox, Wolf
 - **Omnivores**: Boar, Duck, Goat, Rabbit
 - **Herbivores**: Buffalo, Caterpillar, Deer, Horse, Mouse, Sheep
 
-## Features
+---
+
+## Features ✨
 
 - Simulates an ecosystem with animals and plants interacting dynamically.
 - Customizable simulation parameters via YAML configuration files.
 - Scheduled tasks for automated management of simulation elements.
 - Responsive frontend interface for visualizing and interacting with the simulation.
 
-## Getting Started
+---
+
+## Getting Started 🚀
 
 To run the simulation locally:
 
@@ -114,12 +129,14 @@ To run the simulation locally:
 4. Run the application: `java -jar src/main/java/ru/pr1nkos/islandsimulation/IslandSimulationApplication.java`.
 5. Access the simulation UI at `http://localhost:8080/api/island`.
 
-## Contributing
+---
+
+## Contributing 🤝
 
 Contributions are welcome! Feel free to fork the repository and submit pull requests to suggest improvements or add new features.
 
-## License
+---
+
+## License 📜
 
 This project is licensed under the [MIT License](LICENSE).
-
----
