@@ -15,9 +15,6 @@ export class ApiService {
         return fetch(`/api/island`).then(response => response.json());
     }
 
-    static fetchCellDetails(x, y) {
-        return fetch(`/api/island/cell?x=${x}&y=${y}`).then(response => response.json());
-    }
 
     static addAnimal(animalType, type) {
         return fetch(`/api/animals/${animalType}?${animalType}Type=${type}`, { method: 'POST' });

@@ -1,6 +1,7 @@
 package ru.pr1nkos.islandsimulation.jobs;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ public class PlantEatingJob implements Job {
     private final AnimalMovementService animalMovementService;
     private final PlantEatingService plantEatingService;
 
+    @SneakyThrows
     @Override
     public void execute(JobExecutionContext context) {
         animalMovementService.moveAnimals();

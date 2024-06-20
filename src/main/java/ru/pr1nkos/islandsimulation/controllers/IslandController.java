@@ -1,6 +1,7 @@
 package ru.pr1nkos.islandsimulation.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,14 @@ public class IslandController {
     private final AnimalManagementService animalManagementService;
     private final IslandInformationService islandInformationService;
     private final PlantManagementService plantManagementService;
+
+    @Value("${app.refreshInterval}")
+    private Integer refreshInterval;
+
+    @GetMapping("/config/refreshInterval")
+    public ResponseEntity<Integer> getRefreshInterval() {
+        return ResponseEntity.ok(refreshInterval);
+    }
 
     @GetMapping("/island")
     public String getIsland(Model model) {
@@ -68,7 +77,8 @@ public class IslandController {
             plantManagementService.addPlant();
             return ResponseEntity.ok("Random plant added successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add random plant: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to add random plant: " + e.getMessage());
         }
     }
 }

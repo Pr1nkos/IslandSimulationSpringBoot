@@ -1,6 +1,5 @@
 package ru.pr1nkos.islandsimulation.entities.animals;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,7 @@ import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;
 
-@AllArgsConstructor
+
 @RequiredArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)

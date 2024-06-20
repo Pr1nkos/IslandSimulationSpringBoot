@@ -23,22 +23,27 @@ public class BehaviorFactory {
     private final Map<String, OmnivoresEatingBehavior> omnivoresEatingBehaviorMap = new HashMap<>();
 
     public EatingBehavior getEatingBehavior(String type) {
-        return eatingBehaviorMap.computeIfAbsent(type, k -> applicationContext.getBean(PredatorEatingBehavior.class));
+        return eatingBehaviorMap.computeIfAbsent(type,
+                k -> applicationContext.getBean(PredatorEatingBehavior.class));
     }
 
     public MovingBehavior getMovingBehavior(String type) {
-        return movingBehaviorMap.computeIfAbsent(type, k -> applicationContext.getBean(DefaultMovingBehavior.class));
+        return movingBehaviorMap.computeIfAbsent(type,
+                k -> applicationContext.getBean(DefaultMovingBehavior.class));
     }
 
     public ReproducingBehavior getReproducingBehavior(String type) {
-        return reproducingBehaviorMap.computeIfAbsent(type, k -> applicationContext.getBean(DefaultReproducingBehavior.class));
+        return reproducingBehaviorMap.computeIfAbsent(type,
+                k -> applicationContext.getBean(DefaultReproducingBehavior.class));
     }
 
     public PlantEatingBehavior getPlantEatingBehavior(String type) {
-        return plantEatingBehaviorMap.computeIfAbsent(type, k -> applicationContext.getBean(PlantEatingBehavior.class));
+        return plantEatingBehaviorMap.computeIfAbsent(type,
+                k -> applicationContext.getBean(PlantEatingBehavior.class));
     }
 
     public OmnivoresEatingBehavior getOmnivoresEatingBehavior(String type) {
-        return omnivoresEatingBehaviorMap.computeIfAbsent(type, k -> applicationContext.getBean(OmnivoresEatingBehavior.class));
+        return omnivoresEatingBehaviorMap.computeIfAbsent(type,
+                k -> applicationContext.getBean(OmnivoresEatingBehavior.class));
     }
 }

@@ -31,6 +31,5 @@ public class IslandData {
                 islandCells.put(key, new Cell());
             }
         }
-
     }
 }

@@ -23,23 +23,24 @@ public class AnimalBreedingService {
         List<Cell> cells = List.copyOf(islandCells.values());
 
         Cell randomCell = randomManager.getRandomElement(cells);
-
-        if (randomCell != null) {
-            List<Animal> animals = randomCell.getAnimals();
-            if (animals.size() >= 2) {
-                int index1 = randomManager.nextInt(animals.size());
-                int index2 = randomManager.nextIntExcluding(animals.size(), index1);
-
-                Animal animal1 = animals.get(index1);
-                Animal animal2 = animals.get(index2);
-
-                if (animal1.getClass() == animal2.getClass() && randomManager.nextDouble() < 0.5) {
-                    AnimalType animalType = animal1.getAnimalType();
-                    Animal newAnimal = animalManagementService.createAnimal(animalType);
-                    randomCell.addAnimal(newAnimal);
-                    System.out.println("New animal of type " + animalType.getType() + " has been born in cell." + animal1.getX() + " " + animal1.getY());
-                }
-            }
+        if (randomCell == null || randomCell.getAnimals().size() < 2) {
+            return;
         }
+
+        List<Animal> animals = randomCell.getAnimals();
+
+        int index1 = randomManager.nextInt(animals.size());
+        int index2 = randomManager.nextIntExcluding(animals.size(), index1);
+
+        Animal animal1 = animals.get(index1);
+        Animal animal2 = animals.get(index2);
+        if (animal1.getClass() == animal2.getClass() && randomManager.nextDouble() < 0.5) {
+
+            AnimalType animalType = animal1.getAnimalType();
+            Animal newAnimal = animalManagementService.createAnimal(animalType);
+            randomCell.addAnimal(newAnimal);
+            System.out.println("New animal of type " + animalType.getType() + " has been born in cell." + animal1.getX() + " " + animal1.getY());
+        }
+
     }
 }

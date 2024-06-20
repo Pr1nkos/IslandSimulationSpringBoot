@@ -24,16 +24,13 @@ public class AnimalMovementService {
     public void moveAnimals() {
         Map<String, Cell> islandMap = islandData.getIslandCells();
         List<Animal> animalsToMove = new CopyOnWriteArrayList<>();
-
-        for (Cell cell : islandMap.values()) {
+        islandMap.values().forEach(cell -> {
             List<Animal> animalsInCell = cell.getAnimals();
             if (animalsInCell != null) {
                 animalsToMove.addAll(animalsInCell);
             }
-        }
+        });
+        animalsToMove.forEach(animal -> defaultMovingBehavior.move(animal,islandMap));
 
-        for (Animal animal : animalsToMove) {
-            defaultMovingBehavior.move(animal, islandMap);
-        }
     }
 }

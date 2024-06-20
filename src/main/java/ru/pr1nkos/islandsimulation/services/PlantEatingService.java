@@ -22,7 +22,7 @@ public class PlantEatingService {
     private final PlantManagementService plantManagementService;
     private final RandomManager randomManager;
     private final IslandData islandData;
-    private final List<Animal> animalsToFeed = new CopyOnWriteArrayList<>(); // Используем CopyOnWriteArrayList для безопасности
+    private final List<Animal> animalsToFeed = new CopyOnWriteArrayList<>();
 
     public List<Animal> getAnimalsToFeed() {
         animalsToFeed.clear();
@@ -48,30 +48,31 @@ public class PlantEatingService {
             }
 
             double chanceToEat = getChanceToEatPlant(herbivore);
-            System.out.println(herbivore.getClass().getSimpleName().toLowerCase() +
-                    " пытается съесть растение с шансом " + chanceToEat / 100);
+            logAttemptToEat(herbivore, chanceToEat);
 
             double randomValue = randomManager.nextDouble();
 
             if (randomValue < (chanceToEat / 100)) {
-                System.out.println("Random value: " + randomValue);
-                System.out.println("Chance to eat: " + chanceToEat / 100);
                 eatPlant(herbivore, plant);
-
-                herbivore.setFoodNeed(herbivore.getFoodNeed() - 1);
                 herbivore.setWeight(herbivore.getWeight() + 1);
                 System.out.println("Оставшаяся потребность в пище травоядного: " + herbivore.getFoodNeed());
-            } else {
-                System.out.println("Random value: " + randomValue);
-                System.out.println("Chance to eat: " + chanceToEat / 100);
+            }
+            else {
                 System.out.println("Не удалось съесть растение");
             }
-
-            if (herbivore.getFoodNeed() <= 0) {
-                System.out.println("Травоядное сыто.");
-                break;
-            }
+            herbivore.setFoodNeed(herbivore.getFoodNeed() - 1);
         }
+
+        if (herbivore.getFoodNeed() <= 0) {
+            System.out.println("Животное " + herbivore.getAnimalType() + " сыто");
+        }
+    }
+
+    private void logAttemptToEat(Animal herbivore, double chanceToEat) {
+        System.out.println(herbivore.getClass().getSimpleName().toLowerCase() +
+                " пытается съесть растение с шансом " + chanceToEat / 100);
+        System.out.println("Random value: " + randomManager.nextDouble());
+        System.out.println("Chance to eat: " + chanceToEat / 100);
     }
 
     private Integer getChanceToEatPlant(Animal herbivore) {

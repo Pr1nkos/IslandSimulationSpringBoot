@@ -39,12 +39,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             omnivoreTypeSelect.appendChild(option);
         });
 
-        // Добавление случайных животных при загрузке страницы
-        for (let i = 0; i < 5; i++) {
-            await animalService.addRandomAnimal();
-        }
-        await island.update();
-
     } catch (error) {
         console.error('Error initializing application:', error);
     }
@@ -89,11 +83,15 @@ document.addEventListener('DOMContentLoaded', async function () {
         await island.update();
     });
 
+    const configResponse = await fetch('/api/config/refreshInterval');
+    const refreshInterval = await configResponse.json();
+
     setInterval(async function () {
         if (!modal.isModalOpen) {
             location.reload();
         }
-    }, 5000);
+    }, refreshInterval);
+
 });
 
 window.closeModal = () => {

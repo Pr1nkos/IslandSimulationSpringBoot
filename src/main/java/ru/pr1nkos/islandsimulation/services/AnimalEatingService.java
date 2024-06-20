@@ -22,20 +22,14 @@ public class AnimalEatingService {
     private final List<Animal> animalsToFeed = new CopyOnWriteArrayList<>();
 
     public synchronized List<Animal> getAnimalsToFeed() {
-        List<Animal> animals = new ArrayList<>();
         Map<String, Cell> islandCells = islandData.getIslandCells();
-
-        for (Cell cell : islandCells.values()) {
-            animals.addAll(cell.getAnimals());
-        }
-
-        return animals;
+        islandCells.values().forEach(cell -> animalsToFeed.addAll(cell.getAnimals()));
+        return animalsToFeed;
     }
 
     public void attemptToEat(Animal predator) {
         do {
             Animal prey = findPreyForPredator(predator);
-
             if (prey == null || !prey.isAlive()) {
                 break;
             }
@@ -57,11 +51,13 @@ public class AnimalEatingService {
             }
 
             if (predator.getFoodNeed() <= 0) {
-                System.out.println("Predator is full.");
+                System.out.println("Животное "+predator.getAnimalType()+" сыто");
                 break;
             }
         } while (true);
     }
+
+
 
     private Integer getChanceToEat(Animal predator, Animal prey) {
         return predator.getEatingChances().getOrDefault(prey.getClass().getSimpleName().toLowerCase(), 0);

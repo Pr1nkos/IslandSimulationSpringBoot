@@ -1,13 +1,35 @@
 package ru.pr1nkos.islandsimulation.config;
-
 import org.quartz.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import ru.pr1nkos.islandsimulation.jobs.*;
 
 @Configuration
+@PropertySource("classpath:application.yml")
 public class QuartzConfig {
 
+    @Value("${app.initialAnimalsCount}")
+    private int initialAnimalsCount;
+
+    @Value("${app.animalMovementJobIntervalInSeconds}")
+    private int animalMovementJobIntervalInSeconds;
+
+    @Value("${app.animalEatingJobIntervalInSeconds}")
+    private int animalEatingJobIntervalInSeconds;
+
+    @Value("${app.plantAppearJobIntervalInSeconds}")
+    private int plantAppearJobIntervalInSeconds;
+
+    @Value("${app.plantEatingJobIntervalInSeconds}")
+    private int plantEatingJobIntervalInSeconds;
+
+    @Value("${app.animalBreedingJobIntervalInSeconds}")
+    private int animalBreedingJobIntervalInSeconds;
+
+    @Value("${app.populateIslandJobIntervalInMilliseconds}")
+    private int populateIslandJobIntervalInMilliseconds;
 
     @Bean
     public JobDetail animalMovementJobDetail() {
@@ -20,7 +42,7 @@ public class QuartzConfig {
     @Bean
     public Trigger animalMovementJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(5)
+                .withIntervalInSeconds(animalMovementJobIntervalInSeconds)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -41,7 +63,7 @@ public class QuartzConfig {
     @Bean
     public Trigger animalEatingJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(10)
+                .withIntervalInSeconds(animalEatingJobIntervalInSeconds)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -62,7 +84,7 @@ public class QuartzConfig {
     @Bean
     public Trigger plantAppearJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(10)
+                .withIntervalInSeconds(plantAppearJobIntervalInSeconds)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -83,7 +105,7 @@ public class QuartzConfig {
     @Bean
     public Trigger plantEatingJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(10)
+                .withIntervalInSeconds(plantEatingJobIntervalInSeconds)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -104,7 +126,7 @@ public class QuartzConfig {
     @Bean
     public Trigger animalBreedingJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-                .withIntervalInSeconds(15)
+                .withIntervalInSeconds(animalBreedingJobIntervalInSeconds)
                 .repeatForever();
 
         return TriggerBuilder.newTrigger()
@@ -114,4 +136,26 @@ public class QuartzConfig {
                 .build();
     }
 
+    @Bean
+    public JobDetail populateIslandJobDetail() {
+        return JobBuilder.newJob(PopulateIslandJob.class)
+                .withIdentity("populateIslandJob")
+                .storeDurably()
+                .build();
+    }
+
+    @Bean
+    public Trigger populateIslandJobTrigger() {
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
+                .withIntervalInMilliseconds(populateIslandJobIntervalInMilliseconds)
+                .withRepeatCount(initialAnimalsCount);
+
+        return TriggerBuilder.newTrigger()
+                .forJob(populateIslandJobDetail())
+                .withIdentity("populateIslandTrigger")
+                .withSchedule(scheduleBuilder)
+                .build();
+    }
+
 }
+

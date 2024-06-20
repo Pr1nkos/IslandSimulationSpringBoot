@@ -1,4 +1,4 @@
-import { ApiService } from './apiService.js';
+import {ApiService} from './apiService.js';
 
 export class AnimalService {
     constructor() {
@@ -8,7 +8,10 @@ export class AnimalService {
     }
 
     async fetchAllTypes() {
-        const [predatorData, herbivoreData, omnivoreData] = await Promise.all([
+        const [predatorData,
+            herbivoreData,
+            omnivoreData]
+            = await Promise.all([
             ApiService.fetchPredatorTypes(),
             ApiService.fetchHerbivoreTypes(),
             ApiService.fetchOmnivoreTypes()

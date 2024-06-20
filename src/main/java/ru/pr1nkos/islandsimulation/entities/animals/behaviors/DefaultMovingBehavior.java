@@ -64,7 +64,7 @@ public class DefaultMovingBehavior implements MovingBehavior {
         int maxY = Math.min(19, y + maxSpeed);
 
         if (maxX - minX <= 0 || maxY - minY <= 0) {
-            return x + "," + y; // Возвращаем текущее положение, если не можем генерировать новую позицию
+            return x + "," + y;
         }
 
         int newX = minX + randomManager.nextInt(maxX - minX + 1);

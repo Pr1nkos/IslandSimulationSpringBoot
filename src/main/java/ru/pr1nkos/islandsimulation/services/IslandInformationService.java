@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.pr1nkos.islandsimulation.config.IslandConfig;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
-import ru.pr1nkos.islandsimulation.entities.plants.Plant;
 import ru.pr1nkos.islandsimulation.pojo.Cell;
 import ru.pr1nkos.islandsimulation.pojo.IslandData;
 
@@ -47,9 +46,8 @@ public class IslandInformationService {
             symbols.add(animalSymbolService.getAnimalSymbol(animal));
         }
 
-        for (Plant plant : cell.getPlants()) {
-            symbols.add("🌿");
-        }
+        cell.getPlants().forEach(plant -> symbols.add("🌿"));
+
         return symbols;
     }
 }

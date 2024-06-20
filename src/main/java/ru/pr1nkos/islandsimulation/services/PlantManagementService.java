@@ -14,13 +14,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PlantManagementService {
 
-    private final List<Plant> plants = new ArrayList<>();
+    private final ThreadLocal<List<Plant>> plants = ThreadLocal.withInitial(ArrayList::new);
     private final RandomManager randomManager;
     private final IslandData islandData;
 
     public void addPlant() {
         Plant plant = new Plant();
-        plants.add(plant);
+        plants.get().add(plant);
         placePlantOnIsland(plant);
     }
 
@@ -52,6 +52,6 @@ public class PlantManagementService {
     public void removePlantFromIsland(Plant plant) {
         String key = plant.getX() + "," + plant.getY();
         islandData.getIslandCells().get(key).getPlants().remove(plant);
-        plants.remove(plant);
+        plants.get().remove(plant);
     }
 }

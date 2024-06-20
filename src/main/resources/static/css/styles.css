@@ -5,9 +5,9 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center; /* центрирование по горизонтали */
-    align-items: center; /* центрирование по вертикали */
-    height: 100vh; /* высота окна просмотра */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
@@ -54,12 +54,9 @@ button:hover {
     display: grid;
     grid-template-columns: repeat(100, 20px);
     grid-template-rows: repeat(20, 20px);
-    gap: 1px;
     margin: 20px auto;
-    background-color: #e0e0e0;
     padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
 }
 
 .cell {
@@ -106,13 +103,13 @@ button:hover {
     animation: fadeIn 0.3s;
 }
 
-/* Анимация появления модального окна */
+
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
 }
 
-/* Кнопка закрытия */
+
 .close {
     color: #aaa;
     float: right;
@@ -137,18 +134,18 @@ button:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 20px; /* Adjust margin as needed */
+    margin-top: 20px;
 }
 
 #addRandomAnimalButton:hover {
     background-color: #0056b3;
 }
-/* Center the Add Random Animal button */
+
 .add-random-animal-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px; /* Adjust as needed */
+    margin-top: 20px;
 }
 
 .add-random-animal-button button {
