@@ -8,7 +8,7 @@ import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavior;
 import ru.pr1nkos.islandsimulation.entities.plants.Plant;
-import ru.pr1nkos.islandsimulation.pojo.Cell;
+import ru.pr1nkos.islandsimulation.entities.island.Cell;
 import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;

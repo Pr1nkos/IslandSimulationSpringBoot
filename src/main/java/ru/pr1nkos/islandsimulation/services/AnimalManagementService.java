@@ -9,8 +9,8 @@ import ru.pr1nkos.islandsimulation.entities.animals.interfaces.AnimalType;
 import ru.pr1nkos.islandsimulation.enums.HerbivoreType;
 import ru.pr1nkos.islandsimulation.enums.OmnivoreType;
 import ru.pr1nkos.islandsimulation.enums.PredatorType;
-import ru.pr1nkos.islandsimulation.pojo.Cell;
-import ru.pr1nkos.islandsimulation.pojo.IslandData;
+import ru.pr1nkos.islandsimulation.entities.island.Cell;
+import ru.pr1nkos.islandsimulation.entities.island.IslandData;
 
 import java.util.List;
 import java.util.Map;

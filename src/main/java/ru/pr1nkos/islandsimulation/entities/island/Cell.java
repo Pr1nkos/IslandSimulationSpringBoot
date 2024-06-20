@@ -1,4 +1,4 @@
-package ru.pr1nkos.islandsimulation.pojo;
+package ru.pr1nkos.islandsimulation.entities.island;
 
 import lombok.Data;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;

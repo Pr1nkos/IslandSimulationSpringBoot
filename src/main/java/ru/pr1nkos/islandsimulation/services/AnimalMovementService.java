@@ -5,8 +5,8 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.behaviors.DefaultMovingBehavior;
-import ru.pr1nkos.islandsimulation.pojo.Cell;
-import ru.pr1nkos.islandsimulation.pojo.IslandData;
+import ru.pr1nkos.islandsimulation.entities.island.Cell;
+import ru.pr1nkos.islandsimulation.entities.island.IslandData;
 
 import java.util.List;
 import java.util.Map;

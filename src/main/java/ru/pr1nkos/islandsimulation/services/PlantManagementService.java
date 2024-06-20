@@ -3,8 +3,8 @@ package ru.pr1nkos.islandsimulation.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.pr1nkos.islandsimulation.entities.plants.Plant;
-import ru.pr1nkos.islandsimulation.pojo.Cell;
-import ru.pr1nkos.islandsimulation.pojo.IslandData;
+import ru.pr1nkos.islandsimulation.entities.island.Cell;
+import ru.pr1nkos.islandsimulation.entities.island.IslandData;
 
 import java.util.ArrayList;
 import java.util.List;

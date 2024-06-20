@@ -1,4 +1,4 @@
-package ru.pr1nkos.islandsimulation.pojo;
+package ru.pr1nkos.islandsimulation.entities.island;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Data;

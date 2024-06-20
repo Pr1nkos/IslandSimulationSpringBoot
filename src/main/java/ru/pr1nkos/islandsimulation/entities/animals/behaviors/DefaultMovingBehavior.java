@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.MovingBehavior;
-import ru.pr1nkos.islandsimulation.pojo.Cell;
+import ru.pr1nkos.islandsimulation.entities.island.Cell;
 import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;
