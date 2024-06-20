@@ -2,14 +2,14 @@ spring:
     application:
         name: IslandSimulation
 island:
-    width: 100
-    height: 20
+    width: 10
+    height: 10
 app:
-    refreshInterval: 5000
-    initialAnimalsCount: 4
+    refreshInterval: 1000
+    initialAnimalsCount: 10
     animalMovementJobIntervalInSeconds: 5
     animalEatingJobIntervalInSeconds: 10
-    plantAppearJobIntervalInSeconds: 10
+    plantAppearJobIntervalInSeconds: 1
     plantEatingJobIntervalInSeconds: 10
     animalBreedingJobIntervalInSeconds: 1
     populateIslandJobIntervalInMilliseconds: 500

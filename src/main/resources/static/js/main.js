@@ -92,9 +92,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }, refreshInterval);
 
+    window.closeModal = () => {
+        modal.closeModal();
+    };
 });
 
-window.closeModal = () => {
-    const modal = new Modal('#modal', '#modal-content-text');
-    modal.closeModal();
-};
+

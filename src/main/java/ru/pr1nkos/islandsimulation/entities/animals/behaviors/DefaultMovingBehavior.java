@@ -18,7 +18,8 @@ public class DefaultMovingBehavior implements MovingBehavior {
     public void move(Animal animal, Map<String, Cell> islandMap) {
         String currentKey = findCurrentPosition(animal, islandMap);
         if (animal.getMaxSpeed() == 0) {
-            System.out.println("This animal cannot move because maxSpeed is 0.");
+//            System.out.println("This animal cannot move because maxSpeed is 0.");
+
         }
         else {
             String newKey = getRandomNeighbor(currentKey, animal.getMaxSpeed());
