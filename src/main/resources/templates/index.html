@@ -7,30 +7,31 @@
     <script type="module" src="/js/main.js"></script>
 </head>
 <body>
-<div class="container">
-    <h1>Island Simulation</h1>
-    <form id="addPredatorForm">
-        <label for="predatorType">Add Predator:</label>
-        <select id="predatorType" name="predatorType"></select>
-        <button id="addPredatorButton" type="button">Add Predator</button>
-    </form>
+<div class="main-container">
+    <div class="container">
+        <h1>Island Simulation</h1>
+        <form id="addPredatorForm">
+            <label for="predatorType">Add Predator:</label>
+            <select id="predatorType" name="predatorType"></select>
+            <button id="addPredatorButton" type="button">Add Predator</button>
+        </form>
 
-    <form id="addHerbivoreForm">
-        <label for="herbivoreType">Add Herbivore:</label>
-        <select id="herbivoreType" name="herbivoreType"></select>
-        <button id="addHerbivoreButton" type="button">Add Herbivore</button>
-    </form>
+        <form id="addHerbivoreForm">
+            <label for="herbivoreType">Add Herbivore:</label>
+            <select id="herbivoreType" name="herbivoreType"></select>
+            <button id="addHerbivoreButton" type="button">Add Herbivore</button>
+        </form>
 
-    <form id="addOmnivoreForm">
-        <label for="omnivoreType">Add Omnivore:</label>
-        <select id="omnivoreType" name="omnivoreType"></select>
-        <button id="addOmnivoreButton" type="button">Add Omnivore</button>
-    </form>
+        <form id="addOmnivoreForm">
+            <label for="omnivoreType">Add Omnivore:</label>
+            <select id="omnivoreType" name="omnivoreType"></select>
+            <button id="addOmnivoreButton" type="button">Add Omnivore</button>
+        </form>
 
-
-<div class="add-random-animal-button">
-    <button id="addRandomAnimalButton" type="button">Add Random Animal</button>
-</div>
+        <div class="add-random-animal-button">
+            <button id="addRandomAnimalButton" type="button">Add Random Animal</button>
+        </div>
+    </div>
 
     <div class="island">
         <div th:each="row, rowStat : ${island}">
@@ -40,14 +41,12 @@
     </div>
 </div>
 
-
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <p id="modal-content-text"></p>
     </div>
 </div>
-
 
 </body>
 </html>

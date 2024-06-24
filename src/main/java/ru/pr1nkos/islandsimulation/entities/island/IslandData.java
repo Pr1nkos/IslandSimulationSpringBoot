@@ -9,6 +9,8 @@ import ru.pr1nkos.islandsimulation.config.IslandConfig;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Component
 @Data
@@ -17,19 +19,27 @@ public class IslandData {
 
     private final IslandConfig islandConfig;
     private final ApplicationEventPublisher eventPublisher;
-    private Map<String, Cell> islandCells;
+    private final Map<String, Cell> islandCells = new HashMap<>();
 
     @PostConstruct
     private void initializeIsland() {
-        this.islandCells = new HashMap<>();
         int width = islandConfig.getWidth();
         int height = islandConfig.getHeight();
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                String key = i + "," + j;
-                islandCells.put(key, new Cell());
+        try (ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())) {
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    int finalI = i;
+                    int finalJ = j;
+                    executor.submit(() -> {
+                        String key = finalI + "," + finalJ;
+                        synchronized (islandCells) {
+                            islandCells.put(key, new Cell());
+                        }
+                    });
+                }
             }
+            executor.shutdown();
         }
     }
 }

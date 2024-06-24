@@ -63,9 +63,9 @@ public class PlantEatingService {
             herbivore.setFoodNeed(herbivore.getFoodNeed() - 1);
         }
 
-        if (herbivore.getFoodNeed() <= 0) {
-            System.out.println("Животное " + herbivore.getAnimalType() + " сыто");
-        }
+//        if (herbivore.getFoodNeed() <= 0) {
+//            System.out.println("Животное " + herbivore.getAnimalType() + " сыто");
+//        }
     }
 
     private void logAttemptToEat(Animal herbivore, double chanceToEat) {

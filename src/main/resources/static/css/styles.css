@@ -10,8 +10,15 @@ body {
     height: 100vh;
 }
 
+.main-container {
+    text-align: center;
+}
+
 .container {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -56,7 +63,8 @@ button:hover {
     grid-template-rows: repeat(20, 20px);
     margin: 20px auto;
     padding: 10px;
-
+    justify-content: center;
+    align-items: center;
 }
 
 .cell {
@@ -103,12 +111,10 @@ button:hover {
     animation: fadeIn 0.3s;
 }
 
-
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
 }
-
 
 .close {
     color: #aaa;
@@ -123,6 +129,7 @@ button:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
 #addRandomAnimalButton {
     display: flex;
     justify-content: center;

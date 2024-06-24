@@ -51,7 +51,7 @@ public class AnimalEatingService {
             }
 
             if (predator.getFoodNeed() <= 0) {
-                System.out.println("Животное "+predator.getAnimalType()+" сыто");
+//                System.out.println("Животное "+predator.getAnimalType()+" сыто");
                 break;
             }
         } while (true);
