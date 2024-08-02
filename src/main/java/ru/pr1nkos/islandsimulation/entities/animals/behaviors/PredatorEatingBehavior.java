@@ -5,6 +5,9 @@ import ru.pr1nkos.islandsimulation.entities.animals.Animal;
 import ru.pr1nkos.islandsimulation.entities.animals.interfaces.EatingBehavior;
 import ru.pr1nkos.islandsimulation.entities.plants.Plant;
 
+/**
+ * The type Predator eating behavior.
+ */
 @Component
 public class PredatorEatingBehavior implements EatingBehavior {
 

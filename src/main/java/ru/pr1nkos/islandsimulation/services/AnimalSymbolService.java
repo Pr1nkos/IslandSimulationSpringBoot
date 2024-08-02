@@ -9,9 +9,18 @@ import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Goat;
 import ru.pr1nkos.islandsimulation.entities.animals.omnivores.Rabbit;
 import ru.pr1nkos.islandsimulation.entities.animals.predators.*;
 
+/**
+ * The type Animal symbol service.
+ */
 @Service
 public class AnimalSymbolService {
 
+    /**
+     * Gets animal symbol.
+     *
+     * @param animal the animal
+     * @return the animal symbol
+     */
     public String getAnimalSymbol(Animal animal) {
         if (animal instanceof Bear) {
             return "🐻";

@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Plant management service.
+ */
 @Service
 @RequiredArgsConstructor
 public class PlantManagementService {
@@ -18,6 +21,9 @@ public class PlantManagementService {
     private final RandomManager randomManager;
     private final IslandData islandData;
 
+    /**
+     * Add plant.
+     */
     public void addPlant() {
         Plant plant = new Plant();
         plants.get().add(plant);
@@ -44,11 +50,23 @@ public class PlantManagementService {
         return cell.getPlants().size() < 200;
     }
 
+    /**
+     * Gets plants at.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the plants at
+     */
     public List<Plant> getPlantsAt(int x, int y) {
         String key = x + "," + y;
         return islandData.getIslandCells().getOrDefault(key, new Cell()).getPlants();
     }
 
+    /**
+     * Remove plant from island.
+     *
+     * @param plant the plant
+     */
     public void removePlantFromIsland(Plant plant) {
         String key = plant.getX() + "," + plant.getY();
         islandData.getIslandCells().get(key).getPlants().remove(plant);

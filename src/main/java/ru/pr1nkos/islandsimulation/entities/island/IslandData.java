@@ -12,6 +12,9 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * The type Island data.
+ */
 @Component
 @Data
 @RequiredArgsConstructor

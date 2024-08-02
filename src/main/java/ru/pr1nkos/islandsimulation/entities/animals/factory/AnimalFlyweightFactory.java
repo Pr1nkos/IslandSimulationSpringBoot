@@ -18,6 +18,9 @@ import ru.pr1nkos.islandsimulation.services.RandomManager;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Animal flyweight factory.
+ */
 @Component
 @RequiredArgsConstructor
 public class AnimalFlyweightFactory {
@@ -28,6 +31,12 @@ public class AnimalFlyweightFactory {
     private final AnimalCharacteristicsService animalCharacteristicsService;
     private final RandomManager randomManager;
 
+    /**
+     * Gets animal.
+     *
+     * @param predatorType the predator type
+     * @return the animal
+     */
     public Animal getAnimal(PredatorType predatorType) {
         String key = predatorType.name();
         if (!predatorCache.containsKey(key)) {
@@ -36,6 +45,12 @@ public class AnimalFlyweightFactory {
         return predatorCache.get(key);
     }
 
+    /**
+     * Gets animal.
+     *
+     * @param herbivoreType the herbivore type
+     * @return the animal
+     */
     public Animal getAnimal(HerbivoreType herbivoreType) {
         String key = herbivoreType.name();
         if (!herbivoreCache.containsKey(key)) {
@@ -44,6 +59,12 @@ public class AnimalFlyweightFactory {
         return herbivoreCache.get(key);
     }
 
+    /**
+     * Gets animal.
+     *
+     * @param omnivoreType the omnivore type
+     * @return the animal
+     */
     public Animal getAnimal(OmnivoreType omnivoreType) {
         String key = omnivoreType.name();
         if (!omnivoreCache.containsKey(key)) {

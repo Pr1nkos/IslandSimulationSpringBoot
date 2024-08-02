@@ -10,6 +10,9 @@ import ru.pr1nkos.islandsimulation.services.AnimalEatingService;
 
 import java.util.List;
 
+/**
+ * The type Animal eating job.
+ */
 @Component
 @RequiredArgsConstructor
 public class AnimalEatingJob implements Job {

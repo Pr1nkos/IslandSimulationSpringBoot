@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.services.AnimalMovementService;
 
 
+/**
+ * The type Animal movement job.
+ */
 @Component
 @RequiredArgsConstructor
 public class AnimalMovementJob implements Job {

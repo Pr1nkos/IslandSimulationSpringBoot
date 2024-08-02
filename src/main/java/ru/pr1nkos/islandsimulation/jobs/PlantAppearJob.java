@@ -7,6 +7,9 @@ import org.quartz.JobExecutionContext;
 import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.services.PlantManagementService;
 
+/**
+ * The type Plant appear job.
+ */
 @Component
 @RequiredArgsConstructor
 public class PlantAppearJob implements Job {

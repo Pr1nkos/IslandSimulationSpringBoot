@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * The type Animal eating service.
+ */
 @Service
 @RequiredArgsConstructor
 public class AnimalEatingService {
@@ -21,12 +24,22 @@ public class AnimalEatingService {
     private final IslandData islandData;
     private final List<Animal> animalsToFeed = new CopyOnWriteArrayList<>();
 
+    /**
+     * Gets animals to feed.
+     *
+     * @return the animals to feed
+     */
     public synchronized List<Animal> getAnimalsToFeed() {
         Map<String, Cell> islandCells = islandData.getIslandCells();
         islandCells.values().forEach(cell -> animalsToFeed.addAll(cell.getAnimals()));
         return animalsToFeed;
     }
 
+    /**
+     * Attempt to eat.
+     *
+     * @param predator the predator
+     */
     public void attemptToEat(Animal predator) {
         do {
             Animal prey = findPreyForPredator(predator);

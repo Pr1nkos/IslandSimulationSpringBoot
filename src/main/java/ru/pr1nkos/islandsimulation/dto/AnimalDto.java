@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+/**
+ * The type Animal dto.
+ */
 @Component
 @Data
 public class AnimalDto {

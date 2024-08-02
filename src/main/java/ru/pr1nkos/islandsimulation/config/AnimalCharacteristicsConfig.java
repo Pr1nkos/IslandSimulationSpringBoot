@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import ru.pr1nkos.islandsimulation.dto.AnimalCharacteristicsDto;
 
+/**
+ * The type Animal characteristics config.
+ */
 @Configuration
 @PropertySource(factory = YamlPropertySourceFactory.class, value = "classpath:animalCharacteristics.yml")
 @EnableConfigurationProperties(AnimalCharacteristicsDto.class)

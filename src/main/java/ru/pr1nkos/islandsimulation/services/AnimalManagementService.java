@@ -15,6 +15,9 @@ import ru.pr1nkos.islandsimulation.entities.island.IslandData;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Animal management service.
+ */
 @Service
 @Data
 @RequiredArgsConstructor
@@ -24,21 +27,42 @@ public class AnimalManagementService {
     private final RandomManager randomManager;
     private final IslandData islandData;
 
+    /**
+     * Add predator.
+     *
+     * @param predatorType the predator type
+     */
     public void addPredator(PredatorType predatorType) {
         Animal animal = animalFactory.createAnimal(predatorType);
         placeAnimalOnIsland(animal);
     }
 
+    /**
+     * Add herbivore.
+     *
+     * @param herbivoreType the herbivore type
+     */
     public void addHerbivore(HerbivoreType herbivoreType) {
         Animal animal = animalFactory.createAnimal(herbivoreType);
         placeAnimalOnIsland(animal);
     }
 
+    /**
+     * Add omnivores.
+     *
+     * @param omnivoreType the omnivore type
+     */
     public void addOmnivores(OmnivoreType omnivoreType) {
         Animal animal = animalFactory.createAnimal(omnivoreType);
         placeAnimalOnIsland(animal);
     }
 
+    /**
+     * Create animal animal.
+     *
+     * @param animalType the animal type
+     * @return the animal
+     */
     public Animal createAnimal(AnimalType animalType) {
         return switch (animalType) {
             case PredatorType predatorType -> animalFactory.createAnimal(predatorType);
@@ -68,11 +92,23 @@ public class AnimalManagementService {
         return cell.getAnimals().size() < animal.getBaseMaxCountPerLocation();
     }
 
+    /**
+     * Gets animals at.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the animals at
+     */
     public List<Animal> getAnimalsAt(int x, int y) {
         String key = x + "," + y;
         return islandData.getIslandCells().getOrDefault(key, new Cell()).getAnimals();
     }
 
+    /**
+     * Remove animal from island.
+     *
+     * @param animal the animal
+     */
     public void removeAnimalFromIsland(Animal animal) {
         String key = animal.getX() + "," + animal.getY();
         islandData.getIslandCells().get(key).removeAnimal(animal);

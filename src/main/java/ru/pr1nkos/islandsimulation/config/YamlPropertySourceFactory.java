@@ -8,6 +8,9 @@ import org.springframework.lang.NonNull;
 
 import java.util.Objects;
 
+/**
+ * The type Yaml property source factory.
+ */
 public class YamlPropertySourceFactory implements PropertySourceFactory {
     @Override
     public @NonNull PropertySource<?> createPropertySource(String name, EncodedResource resource) {

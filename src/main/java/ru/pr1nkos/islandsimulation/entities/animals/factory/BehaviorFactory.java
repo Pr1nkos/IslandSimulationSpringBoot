@@ -11,6 +11,9 @@ import ru.pr1nkos.islandsimulation.entities.animals.interfaces.ReproducingBehavi
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Behavior factory.
+ */
 @Component
 @RequiredArgsConstructor
 public class BehaviorFactory {
@@ -22,26 +25,56 @@ public class BehaviorFactory {
     private final Map<String, PlantEatingBehavior> plantEatingBehaviorMap = new HashMap<>();
     private final Map<String, OmnivoresEatingBehavior> omnivoresEatingBehaviorMap = new HashMap<>();
 
+    /**
+     * Gets eating behavior.
+     *
+     * @param type the type
+     * @return the eating behavior
+     */
     public EatingBehavior getEatingBehavior(String type) {
         return eatingBehaviorMap.computeIfAbsent(type,
                 k -> applicationContext.getBean(PredatorEatingBehavior.class));
     }
 
+    /**
+     * Gets moving behavior.
+     *
+     * @param type the type
+     * @return the moving behavior
+     */
     public MovingBehavior getMovingBehavior(String type) {
         return movingBehaviorMap.computeIfAbsent(type,
                 k -> applicationContext.getBean(DefaultMovingBehavior.class));
     }
 
+    /**
+     * Gets reproducing behavior.
+     *
+     * @param type the type
+     * @return the reproducing behavior
+     */
     public ReproducingBehavior getReproducingBehavior(String type) {
         return reproducingBehaviorMap.computeIfAbsent(type,
                 k -> applicationContext.getBean(DefaultReproducingBehavior.class));
     }
 
+    /**
+     * Gets plant eating behavior.
+     *
+     * @param type the type
+     * @return the plant eating behavior
+     */
     public PlantEatingBehavior getPlantEatingBehavior(String type) {
         return plantEatingBehaviorMap.computeIfAbsent(type,
                 k -> applicationContext.getBean(PlantEatingBehavior.class));
     }
 
+    /**
+     * Gets omnivores eating behavior.
+     *
+     * @param type the type
+     * @return the omnivores eating behavior
+     */
     public OmnivoresEatingBehavior getOmnivoresEatingBehavior(String type) {
         return omnivoresEatingBehaviorMap.computeIfAbsent(type,
                 k -> applicationContext.getBean(OmnivoresEatingBehavior.class));

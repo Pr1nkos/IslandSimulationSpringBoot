@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import ru.pr1nkos.islandsimulation.jobs.*;
 
+/**
+ * The type Quartz config.
+ */
 @Configuration
 @PropertySource("classpath:application.yml")
 public class QuartzConfig {
@@ -31,6 +34,11 @@ public class QuartzConfig {
     @Value("${app.populateIslandJobIntervalInMilliseconds}")
     private int populateIslandJobIntervalInMilliseconds;
 
+    /**
+     * Animal movement job detail job detail.
+     *
+     * @return the job detail
+     */
     @Bean
     public JobDetail animalMovementJobDetail() {
         return JobBuilder.newJob(AnimalMovementJob.class)
@@ -39,6 +47,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Animal movement job trigger trigger.
+     *
+     * @return the trigger
+     */
     @Bean
     public Trigger animalMovementJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
@@ -52,6 +65,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Animal eating job detail job detail.
+     *
+     * @return the job detail
+     */
     @Bean
     public JobDetail animalEatingJobDetail() {
         return JobBuilder.newJob(AnimalEatingJob.class)
@@ -60,6 +78,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Animal eating job trigger trigger.
+     *
+     * @return the trigger
+     */
     @Bean
     public Trigger animalEatingJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
@@ -73,6 +96,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Plant appear job detail job detail.
+     *
+     * @return the job detail
+     */
     @Bean
     public JobDetail plantAppearJobDetail() {
         return JobBuilder.newJob(PlantAppearJob.class)
@@ -81,6 +109,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Plant appear job trigger trigger.
+     *
+     * @return the trigger
+     */
     @Bean
     public Trigger plantAppearJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
@@ -94,6 +127,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Plant eating job detail job detail.
+     *
+     * @return the job detail
+     */
     @Bean
     public JobDetail plantEatingJobDetail() {
         return JobBuilder.newJob(PlantEatingJob.class)
@@ -102,6 +140,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Plant eating job trigger trigger.
+     *
+     * @return the trigger
+     */
     @Bean
     public Trigger plantEatingJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
@@ -115,6 +158,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Animal breeding job detail job detail.
+     *
+     * @return the job detail
+     */
     @Bean
     public JobDetail animalBreedingJobDetail() {
         return JobBuilder.newJob(AnimalBreedingJob.class)
@@ -123,6 +171,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Animal breeding job trigger trigger.
+     *
+     * @return the trigger
+     */
     @Bean
     public Trigger animalBreedingJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
@@ -136,6 +189,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Populate island job detail job detail.
+     *
+     * @return the job detail
+     */
     @Bean
     public JobDetail populateIslandJobDetail() {
         return JobBuilder.newJob(PopulateIslandJob.class)
@@ -144,6 +202,11 @@ public class QuartzConfig {
                 .build();
     }
 
+    /**
+     * Populate island job trigger trigger.
+     *
+     * @return the trigger
+     */
     @Bean
     public Trigger populateIslandJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()

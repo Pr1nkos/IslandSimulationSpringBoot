@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Island information service.
+ */
 @Service
 @RequiredArgsConstructor
 public class IslandInformationService {
@@ -19,6 +22,11 @@ public class IslandInformationService {
     private final AnimalSymbolService animalSymbolService;
     private final IslandConfig islandConfig;
 
+    /**
+     * Get island string [ ] [ ].
+     *
+     * @return the string [ ] [ ]
+     */
     public String[][] getIsland() {
         String[][] island = new String[islandConfig.getWidth()][islandConfig.getHeight()];
         Map<String, Cell> islandCells = islandData.getIslandCells();
@@ -38,6 +46,13 @@ public class IslandInformationService {
         return totalEntities > 0 ? String.valueOf(totalEntities) : "";
     }
 
+    /**
+     * Gets animal symbols in cell.
+     *
+     * @param x the x
+     * @param y the y
+     * @return the animal symbols in cell
+     */
     public List<String> getAnimalSymbolsInCell(int x, int y) {
         String key = x + "," + y;
         Cell cell = islandData.getIslandCells().getOrDefault(key, new Cell());

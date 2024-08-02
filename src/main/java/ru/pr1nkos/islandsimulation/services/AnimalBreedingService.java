@@ -10,6 +10,9 @@ import ru.pr1nkos.islandsimulation.entities.island.IslandData;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Animal breeding service.
+ */
 @Service
 @RequiredArgsConstructor
 public class AnimalBreedingService {
@@ -18,7 +21,10 @@ public class AnimalBreedingService {
     private final IslandData islandData;
     private final RandomManager randomManager;
 
-    public void breedAnimals() {
+    /**
+     * Reproduce animals.
+     */
+    public void reproduceAnimals() {
         Map<String, Cell> islandCells = islandData.getIslandCells();
         List<Cell> cells = List.copyOf(islandCells.values());
 

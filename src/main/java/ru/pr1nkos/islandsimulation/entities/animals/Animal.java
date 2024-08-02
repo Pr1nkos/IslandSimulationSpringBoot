@@ -14,17 +14,38 @@ import ru.pr1nkos.islandsimulation.services.RandomManager;
 import java.util.Map;
 
 
+/**
+ * The type Animal.
+ */
 @RequiredArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
 public abstract class Animal implements EatingBehavior, MovingBehavior, ReproducingBehavior {
 
+    /**
+     * The Weight.
+     */
     protected double weight;
     private int baseMaxCountPerLocation;
+    /**
+     * The Max speed.
+     */
     protected int maxSpeed;
+    /**
+     * The Food need.
+     */
     protected double foodNeed;
+    /**
+     * The Eating behavior.
+     */
     protected EatingBehavior eatingBehavior;
+    /**
+     * The Moving behavior.
+     */
     protected MovingBehavior movingBehavior;
+    /**
+     * The Reproducing behavior.
+     */
     protected ReproducingBehavior reproducingBehavior;
     private boolean isAlive;
     private Map<String, Integer> eatingChances;
@@ -34,6 +55,19 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
 
     private RandomManager randomManager;
 
+    /**
+     * Instantiates a new Animal.
+     *
+     * @param baseWeight              the base weight
+     * @param baseMaxCountPerLocation the base max count per location
+     * @param baseMaxSpeed            the base max speed
+     * @param baseFoodNeeded          the base food needed
+     * @param eatingBehavior          the eating behavior
+     * @param movingBehavior          the moving behavior
+     * @param reproducingBehavior     the reproducing behavior
+     * @param eatingChances           the eating chances
+     * @param randomManager           the random manager
+     */
     protected Animal(double baseWeight,
                      int baseMaxCountPerLocation,
                      int baseMaxSpeed,
@@ -102,5 +136,10 @@ public abstract class Animal implements EatingBehavior, MovingBehavior, Reproduc
         }
     }
 
+    /**
+     * Gets animal type.
+     *
+     * @return the animal type
+     */
     public abstract AnimalType getAnimalType();
 }

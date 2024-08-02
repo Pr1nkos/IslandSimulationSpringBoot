@@ -11,6 +11,9 @@ import ru.pr1nkos.islandsimulation.services.PlantEatingService;
 
 import java.util.List;
 
+/**
+ * The type Plant eating job.
+ */
 @Component
 @RequiredArgsConstructor
 public class PlantEatingJob implements Job {

@@ -9,11 +9,20 @@ import ru.pr1nkos.islandsimulation.enums.PredatorType;
 
 import java.util.Map;
 
+/**
+ * The type Animal characteristics service.
+ */
 @Service
 @RequiredArgsConstructor
 public class AnimalCharacteristicsService {
     private final AnimalCharacteristicsDto animalCharacteristicsDto;
 
+    /**
+     * Gets chances for predator.
+     *
+     * @param predatorType the predator type
+     * @return the chances for predator
+     */
     public Map<String, Integer> getChancesForPredator(PredatorType predatorType) {
         return switch (predatorType) {
             case WOLF -> animalCharacteristicsDto.getWolf().getEatingChances();
@@ -24,6 +33,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets chances for herbivore.
+     *
+     * @param herbivoreType the herbivore type
+     * @return the chances for herbivore
+     */
     public Map<String, Integer> getChancesForHerbivore(HerbivoreType herbivoreType) {
         return switch (herbivoreType) {
             case HORSE -> animalCharacteristicsDto.getHorse().getEatingChances();
@@ -35,6 +50,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets chances for omnivores.
+     *
+     * @param omnivoreType the omnivore type
+     * @return the chances for omnivores
+     */
     public Map<String, Integer> getChancesForOmnivores(OmnivoreType omnivoreType) {
         return switch (omnivoreType) {
             case RABBIT -> animalCharacteristicsDto.getRabbit().getEatingChances();
@@ -44,6 +65,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets base weight for predator.
+     *
+     * @param predatorType the predator type
+     * @return the base weight for predator
+     */
     public double getBaseWeightForPredator(PredatorType predatorType) {
         return switch (predatorType){
             case WOLF -> animalCharacteristicsDto.getWolf().getBaseWeight();
@@ -54,6 +81,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets base weight for herbivore.
+     *
+     * @param herbivoreType the herbivore type
+     * @return the base weight for herbivore
+     */
     public double getBaseWeightForHerbivore(HerbivoreType herbivoreType) {
         return switch (herbivoreType){
             case HORSE -> animalCharacteristicsDto.getHorse().getBaseWeight();
@@ -65,6 +98,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets base weight for omnivores.
+     *
+     * @param omnivoreType the omnivore type
+     * @return the base weight for omnivores
+     */
     public double getBaseWeightForOmnivores(OmnivoreType omnivoreType) {
         return switch (omnivoreType){
             case RABBIT -> animalCharacteristicsDto.getRabbit().getBaseWeight();
@@ -75,6 +114,12 @@ public class AnimalCharacteristicsService {
     }
 
 
+    /**
+     * Get base max count per location for predator int.
+     *
+     * @param predatorType the predator type
+     * @return the int
+     */
     public int getBaseMaxCountPerLocationForPredator(PredatorType predatorType){
         return switch (predatorType){
             case WOLF -> animalCharacteristicsDto.getWolf().getBaseMaxCountPerLocation();
@@ -85,6 +130,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets base max count per location for herbivore.
+     *
+     * @param herbivoreType the herbivore type
+     * @return the base max count per location for herbivore
+     */
     public int getBaseMaxCountPerLocationForHerbivore(HerbivoreType herbivoreType) {
         return switch (herbivoreType){
             case HORSE -> animalCharacteristicsDto.getHorse().getBaseMaxCountPerLocation();
@@ -96,6 +147,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets base max count per location for omnivores.
+     *
+     * @param omnivoreType the omnivore type
+     * @return the base max count per location for omnivores
+     */
     public int getBaseMaxCountPerLocationForOmnivores(OmnivoreType omnivoreType) {
         return switch (omnivoreType){
             case RABBIT -> animalCharacteristicsDto.getRabbit().getBaseMaxCountPerLocation();
@@ -104,6 +161,13 @@ public class AnimalCharacteristicsService {
             case DUCK -> animalCharacteristicsDto.getDuck().getBaseMaxCountPerLocation();
         };
     }
+
+    /**
+     * Get base max speed for predator int.
+     *
+     * @param predatorType the predator type
+     * @return the int
+     */
     public int getBaseMaxSpeedForPredator(PredatorType predatorType){
         return switch (predatorType){
             case WOLF -> animalCharacteristicsDto.getWolf().getBaseMaxSpeed();
@@ -114,6 +178,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets base max speed for herbivore.
+     *
+     * @param herbivoreType the herbivore type
+     * @return the base max speed for herbivore
+     */
     public int getBaseMaxSpeedForHerbivore(HerbivoreType herbivoreType) {
         return switch (herbivoreType){
             case HORSE -> animalCharacteristicsDto.getHorse().getBaseMaxSpeed();
@@ -125,6 +195,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets base max speed for omnivores.
+     *
+     * @param omnivoreType the omnivore type
+     * @return the base max speed for omnivores
+     */
     public int getBaseMaxSpeedForOmnivores(OmnivoreType omnivoreType) {
         return switch (omnivoreType){
             case RABBIT -> animalCharacteristicsDto.getRabbit().getBaseMaxSpeed();
@@ -134,6 +210,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets food needed for predator.
+     *
+     * @param predatorType the predator type
+     * @return the food needed for predator
+     */
     public double getbaseFoodNeededForPredator(PredatorType predatorType) {
         return switch (predatorType){
             case WOLF -> animalCharacteristicsDto.getWolf().getBaseFoodNeeded();
@@ -144,6 +226,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets food needed for herbivore.
+     *
+     * @param herbivoreType the herbivore type
+     * @return the food needed for herbivore
+     */
     public double getbaseFoodNeededForHerbivore(HerbivoreType herbivoreType) {
         return switch (herbivoreType){
             case HORSE -> animalCharacteristicsDto.getHorse().getBaseFoodNeeded();
@@ -155,6 +243,12 @@ public class AnimalCharacteristicsService {
         };
     }
 
+    /**
+     * Gets food needed for omnivores.
+     *
+     * @param omnivoreType the omnivore type
+     * @return the food needed for omnivores
+     */
     public double getbaseFoodNeededForOmnivores(OmnivoreType omnivoreType) {
         return switch (omnivoreType){
             case RABBIT -> animalCharacteristicsDto.getRabbit().getBaseFoodNeeded();

@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * The type Animal movement service.
+ */
 @Service
 @RequiredArgsConstructor
 
@@ -20,6 +23,9 @@ public class AnimalMovementService {
     private final DefaultMovingBehavior defaultMovingBehavior;
     private final IslandData islandData;
 
+    /**
+     * Move animals.
+     */
     @SneakyThrows
     public void moveAnimals() {
         Map<String, Cell> islandMap = islandData.getIslandCells();

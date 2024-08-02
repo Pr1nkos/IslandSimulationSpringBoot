@@ -9,6 +9,9 @@ import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;
 
+/**
+ * The type Default moving behavior.
+ */
 @Component
 @RequiredArgsConstructor
 public class DefaultMovingBehavior implements MovingBehavior {

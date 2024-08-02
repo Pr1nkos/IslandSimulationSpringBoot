@@ -11,6 +11,9 @@ import ru.pr1nkos.islandsimulation.enums.PredatorType;
 import ru.pr1nkos.islandsimulation.services.AnimalManagementService;
 import ru.pr1nkos.islandsimulation.services.RandomManager;
 
+/**
+ * The type Populate island job.
+ */
 @Component
 @RequiredArgsConstructor
 public class PopulateIslandJob implements Job {

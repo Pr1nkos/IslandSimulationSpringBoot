@@ -7,6 +7,9 @@ import org.quartz.JobExecutionContext;
 import org.springframework.stereotype.Component;
 import ru.pr1nkos.islandsimulation.services.AnimalBreedingService;
 
+/**
+ * The type Animal breeding job.
+ */
 @Component
 @RequiredArgsConstructor
 public class AnimalBreedingJob implements Job {
@@ -16,6 +19,6 @@ public class AnimalBreedingJob implements Job {
     @SneakyThrows
     @Override
     public void execute(JobExecutionContext context) {
-        animalBreedingService.breedAnimals();
+        animalBreedingService.reproduceAnimals();
     }
 }

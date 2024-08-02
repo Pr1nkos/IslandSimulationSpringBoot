@@ -13,11 +13,27 @@ import ru.pr1nkos.islandsimulation.services.RandomManager;
 
 import java.util.Map;
 
+/**
+ * The type Bear.
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Bear extends Animal {
 
 
+    /**
+     * Instantiates a new Bear.
+     *
+     * @param baseWeight              the base weight
+     * @param baseMaxCountPerLocation the base max count per location
+     * @param baseMaxSpeed            the base max speed
+     * @param baseFoodNeeded          the base food needed
+     * @param eatingBehavior          the eating behavior
+     * @param movingBehavior          the moving behavior
+     * @param reproducingBehavior     the reproducing behavior
+     * @param eatingChances           the eating chances
+     * @param randomManager           the random manager
+     */
     public Bear
             (double baseWeight,
              int baseMaxCountPerLocation,
