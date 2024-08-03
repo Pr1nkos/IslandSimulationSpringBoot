@@ -1,0 +1,16 @@
+ru.pr1nkos.islandsimulation
+ru.pr1nkos.islandsimulation.config
+ru.pr1nkos.islandsimulation.controllers
+ru.pr1nkos.islandsimulation.dto
+ru.pr1nkos.islandsimulation.entities.animals
+ru.pr1nkos.islandsimulation.entities.animals.behaviors
+ru.pr1nkos.islandsimulation.entities.animals.factory
+ru.pr1nkos.islandsimulation.entities.animals.herbivores
+ru.pr1nkos.islandsimulation.entities.animals.interfaces
+ru.pr1nkos.islandsimulation.entities.animals.omnivores
+ru.pr1nkos.islandsimulation.entities.animals.predators
+ru.pr1nkos.islandsimulation.entities.island
+ru.pr1nkos.islandsimulation.entities.plants
+ru.pr1nkos.islandsimulation.enums
+ru.pr1nkos.islandsimulation.jobs
+ru.pr1nkos.islandsimulation.services
